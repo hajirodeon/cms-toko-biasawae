@@ -1,0 +1,141 @@
+<?php
+/*
+ ****************************************************************** 
+ * CMS-TOKO-BIASAWAE v1.0 (code : Daun Muda). 2018
+ ******************************************************************
+ * Dikembangkan oleh : Agus Muhajir                               *
+ * http://github.com/hajirodeon                                   * 
+ * http://hajirodeon.wordpress.com                                *
+ * http://facebook.com/hajirodeon                                 *
+ * sms/wa/telegram : 081-829-88-54                                *
+ * email : hajirodeon@gmail.com                                   *
+ * ****************************************************************
+ */
+ 
+ 
+
+session_start();
+
+//ambil nilai
+require("../../inc/config.php");
+require("../../inc/fungsi.php");
+require("../../inc/koneksi.php");
+require("../../inc/cek/adm.php");
+$tpl = LoadTpl("../../template/admin.html");
+
+
+nocache;
+
+//nilai
+$filenya = "cara_order.php";
+$judul = "[SETTING]. Cara Order";
+$judulku = "$judul";
+
+
+
+//PROSES ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//simpan
+if ($_POST['btnSMP'])
+	{
+	//ambil nilai
+	$e_isi = cegah2($_POST["editor1"]);
+
+
+
+	//nek null
+	if (empty($e_isi))
+		{
+		//re-direct
+		$pesan = "Input Tidak Lengkap. Harap Diulangi...!!";
+		pekem($pesan,$filenya);
+		exit();
+		}
+
+	else
+		{
+		//perintah SQL
+		mysql_query("UPDATE m_cara_order SET isi = '$e_isi', ".
+						"postdate = '$today'");
+
+
+		//auto-kembali
+		xloc($filenya);
+		exit();
+		}
+	}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+//isi *START
+ob_start();
+
+
+
+echo '<div class="row">
+
+
+
+<div class="col-md-12">
+<div class="box">
+
+<div class="box-body">
+<div class="row">';
+
+
+     	
+echo '<form action="'.$filenya.'" enctype="multipart/form-data" method="post" name="formx">
+
+<div class="col-md-10">';
+
+
+//detail
+$qku = mysql_query("SELECT * FROM m_cara_order");
+$rku = mysql_fetch_assoc($qku);
+$ku_judul = balikin($rku['judul']);
+$ku_isi = balikin($rku['isi']);
+
+
+
+
+echo '<p>
+
+
+<textarea id="editor1" name="editor1" rows="10" cols="100%">
+'.$ku_isi.'
+</textarea>
+        
+</p>
+
+<p>
+<input name="btnSMP" type="submit" value="SIMPAN" class="btn btn-danger">
+</p>
+         
+					
+</div>
+
+</form>
+
+
+
+</div>
+</div>
+</div>
+
+</div>';
+
+
+//isi
+$isi = ob_get_contents();
+ob_end_clean();
+
+require("../../inc/niltpl.php");
+
+//diskonek
+xfree($qbw);
+xclose($koneksi);
+exit();
+?>

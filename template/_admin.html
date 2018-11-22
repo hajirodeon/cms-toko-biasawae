@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{judulku}</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+
+
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="{sumber}/template/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{sumber}/template/adminlte/bower_components/font-awesome/css/font-awesome.min.css">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{sumber}/template/adminlte/dist/css/AdminLTE.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="{sumber}/template/adminlte/dist/css/skins/skins-biasawae.css">
+
+
+
+
+
+
+
+
+<!-- jQuery 3 -->
+<script src="{sumber}/template/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="{sumber}/template/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="{sumber}/template/adminlte/dist/js/adminlte.min.js"></script>
+
+
+<!-- CK Editor -->
+<script src="{sumber}/template/adminlte/bower_components/ckeditor/ckeditor.js"></script>
+
+
+<script>
+  $(function () {
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace('editor1')
+    //bootstrap WYSIHTML5 - text editor
+    $('.textarea').wysihtml5()
+  })
+</script>
+
+
+  
+</head>
+<body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
+<div class="wrapper">
+
+  <header class="main-header" style="position: fixed; width: 100%">
+
+    <!-- Logo -->
+    <a href="{sumber}/adm/index.php" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>A</b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Admin</b></span>
+    </a>
+
+    <!-- Header Navbar: style can be found in header.less -->
+	<nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+  
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="{sumber}/logout.php" alt="KELUAR"><i class="fa fa-gears"></i>KELUAR</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+
+    <li>
+      <a href="{sumber}/adm/index.php"><i class="fa fa-home"></i> BERANDA</a>
+    </li>
+
+  
+    <li class="treeview">
+    	<a href="#">
+            <i class="fa fa-gears"></i>
+            <span>SETTING</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+		<ul class="treeview-menu">
+    		
+    	<li>
+    		<a href="{sumber}/adm/s/pass.php" title="Ganti Password"><i class="fa fa-circle-o"></i>Ganti Password</a>
+	    </li>
+
+	    
+    	<li>
+    		<a href="{sumber}/adm/s/profil.php" title="Profil Toko"><i class="fa fa-circle-o"></i>Profil Toko</a>
+	    </li>
+
+	    
+    	<li>
+    		<a href="{sumber}/adm/s/cara_order.php" title="Cara Order"><i class="fa fa-circle-o"></i>Cara Order</a>
+	    </li>
+	    
+    	<li>
+    		<a href="{sumber}/adm/s/pembayaran.php" title="Pembayaran"><i class="fa fa-circle-o"></i>Pembayaran</a>
+	    </li>
+
+	    
+    	<li>
+    		<a href="{sumber}/adm/s/jasa_kirim.php" title="Jasa Kirim"><i class="fa fa-circle-o"></i>Jasa Kirim</a>
+	    </li>
+	    
+    	<li>
+    		<a href="{sumber}/adm/s/ongkir.php" title="Ongkos Kirim"><i class="fa fa-circle-o"></i>Ongkos Kirim</a>
+	    </li>
+	    
+    	<li>
+    		<a href="{sumber}/adm/s/tema.php" title="Tema Template"><i class="fa fa-circle-o"></i>Tema Template</a>
+	    </li>
+
+    	<li>
+    		<a href="{sumber}/adm/s/banner.php" title="Banner dan Background"><i class="fa fa-circle-o"></i>Banner dan Background</a>
+	    </li>
+
+    	</ul>
+   </li>
+
+
+    
+    <li class="treeview">
+    	<a href="#">
+            <i class="fa fa-database"></i>
+            <span>DATA MASTER</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+		<ul class="treeview-menu">
+    		
+    	<li>
+    		<a href="{sumber}/adm/d/kategori.php" title="Data Kategori"><i class="fa fa-circle-o"></i>Data Kategori</a>
+	    </li>
+    		
+    	<li>
+    		<a href="{sumber}/adm/d/info.php" title="Data info"><i class="fa fa-circle-o"></i>Data Info</a>
+	    </li>
+	    
+    	<li>
+    		<a href="{sumber}/adm/d/member.php" title="Data Member"><i class="fa fa-circle-o"></i>Data Member</a>
+	    </li>
+	    
+    	<li>
+    		<a href="{sumber}/adm/d/item.php" title="Data Item"><i class="fa fa-circle-o"></i>Data Item</a>
+	    </li>
+	    
+    	<li>
+    		<a href="{sumber}/adm/d/headline.php" title="Data Produk Unggulan"><i class="fa fa-circle-o"></i>Data Produk Unggulan</a>
+	    </li>
+	    
+	
+	    
+    	</ul>
+   </li>
+
+
+
+
+    <li>
+      <a href="{sumber}/adm/diskusi/diskusi.php" title="Diskusi"><i class="fa fa-pencil-square-o"></i>DISKUSI</a>
+    </li>
+
+	
+
+
+
+    <li class="treeview">
+    	<a href="#">
+            <i class="fa fa-opencart"></i>
+            <span>PESANAN</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+		<ul class="treeview-menu">
+    	<li>
+    		<a href="{sumber}/adm/o/baru.php" title="Baru"><i class="fa fa-circle-o"></i>Baru</a>
+	    </li>
+
+    	<li>
+    		<a href="{sumber}/adm/o/tolak.php" title="Tolak"><i class="fa fa-circle-o"></i>Tolak</a>
+	    </li>
+
+
+    	<li>
+    		<a href="{sumber}/adm/o/proses.php" title="Proses"><i class="fa fa-circle-o"></i>Proses Bungkus</a>
+	    </li>
+
+    	<li>
+    		<a href="{sumber}/adm/o/kirim.php" title="Kirim"><i class="fa fa-circle-o"></i>Kirim</a>
+	    </li>
+	    
+    	<li>
+    		<a href="{sumber}/adm/o/selesai.php" title="Selesai"><i class="fa fa-circle-o"></i>Selesai</a>
+	    </li>
+	    
+    	</ul>
+   </li>
+
+
+
+
+
+    <li>
+      <a href="{sumber}/adm/diskusi/testimoni.php" title="Testimoni"><i class="fa fa-comment"></i>TESTIMONI</a>
+    </li>
+
+	
+
+    <li>
+      <a href="{sumber}/adm/d/newsletter.php" title="NewsLetter"><i class="fa fa-send"></i>NEWSLETTER</a>
+    </li>
+
+
+
+
+
+    
+    <li class="treeview">
+    	<a href="#">
+            <i class="fa fa-print"></i>
+            <span>LAPORAN</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+		<ul class="treeview-menu">
+    	<li>
+    		<a href="{sumber}/adm/lap/brg.php" title="Laporan Item Terjual"><i class="fa fa-circle-o"></i>Item Terjual</a>
+	    </li>
+
+    	<li>
+    		<a href="{sumber}/adm/lap/nota.php" title="Laporan per Nota"><i class="fa fa-circle-o"></i>per Nota</a>
+	    </li>
+
+    	<li>
+    		<a href="{sumber}/adm/lap/item_laris.php" title="Laporan Item Terlaris"><i class="fa fa-circle-o"></i>Item Terlaris</a>
+	    </li>
+
+    	<li>
+    		<a href="{sumber}/adm/lap/history_nota.php" title="Laporan History per Item"><i class="fa fa-circle-o"></i>History per Item</a>
+	    </li>
+
+    	</ul>
+   </li>
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="treeview">
+    	<a href="#">
+            <i class="fa  fa-flash"></i>
+            <span>PROMOSI</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+		<ul class="treeview-menu">
+    	<li>
+    		<a href="{sumber}/adm/promosi/iklanbaris.php" title="Iklan Baris"><i class="fa fa-circle-o"></i>Iklan Baris</a>
+	    </li>
+
+    	<li>
+    		<a href="{sumber}/adm/promosi/android.php" title="Versi Android"><i class="fa fa-circle-o"></i>Versi Android</a>
+	    </li>
+	    
+    	<li>
+    		<a href="{sumber}/adm/promosi/ongkir_jne.php" title="Ongkir JNE"><i class="fa fa-circle-o"></i>Ongkir JNE</a>
+	    </li>
+	    
+	    
+    	<li>
+    		<a href="{sumber}/adm/promosi/kastumisasi.php" title="Kastumisasi"><i class="fa fa-circle-o"></i>Kastumisasi</a>
+	    </li>
+	    
+
+    	</ul>
+   </li>
+
+
+
+
+
+
+
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+    	<br>
+    	<br>
+    	<br>
+    	<br>
+    	<br>
+      <h1>
+        {judul}
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{sumber}/adm/index.php"><i class="fa fa-dashboard"></i> BERANDA</a></li>
+        <li class="active">{judul}</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+			{isi}
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <strong>&copy; 2018 {versi}
+  </footer>
+
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+
+</div>
+<!-- ./wrapper -->
+
+
+</body>
+</html>

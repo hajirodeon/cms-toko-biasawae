@@ -1,6 +1,4 @@
 # cms-toko-biasawae
-cms-toko-biasawae
-
 
 CMS-TOKO-BIASAWAE v1.0 (Code : Daun Muda). 2018.
 
@@ -48,15 +46,25 @@ Cara Instalasi
   
 </ol>
 
+
+---
+
 Contoh Akses Admin :
 
 User/Pass : admin
 
 
+---
 
 Contoh Akses Member :
 
 User/Pass : 1
 
 
+
+---
+
+Contoh Tampilan
+
+<img src="filebox/1.png" width="100%">
 

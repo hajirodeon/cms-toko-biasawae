@@ -25,6 +25,8 @@ Berikut beberapa fitur dari CMS-TOKO-BIASAWAE v1.0 (Code : Daun Muda)
   
   <li>Peta Lokasi Penerima Paket bisa diketahui oleh admin</li>
   
+  <li>dan masih banyak fitur lainnya... </li>
+  
  
 </ul>
 

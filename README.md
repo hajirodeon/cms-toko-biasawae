@@ -66,5 +66,43 @@ User/Pass : 1
 
 Contoh Tampilan
 
+<p>
 <img src="filebox/1.png" width="100%">
+</p>
+
+<p>
+<img src="filebox/2.png" width="100%">
+</p>
+
+<p>
+<img src="filebox/3.png" width="100%">
+</p>
+
+<p>
+<img src="filebox/4.png" width="100%">
+</p>
+
+<p>
+<img src="filebox/5.png" width="100%">
+</p>
+
+<p>
+<img src="filebox/6.png" width="100%">
+</p>
+
+<p>
+<img src="filebox/7.png" width="100%">
+</p>
+
+<p>
+<img src="filebox/admin1.png" width="100%">
+</p>
+
+<p>
+<img src="filebox/admin2.png" width="100%">
+</p>
+
+<p>
+<img src="filebox/admin3.png" width="100%">
+</p>
 

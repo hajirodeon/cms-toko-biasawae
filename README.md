@@ -64,6 +64,12 @@ User/Pass : 1
 
 
 
+
+
+demo bisa dicoba juga di :
+
+http://tekniknih.com/demo/cms-toko-biasawae-demo/
+
 ---
 
 Contoh Tampilan

@@ -48,9 +48,9 @@ if (empty($notakd))
 	
 
 //detail e
-$qtyk = mysql_query("SELECT * FROM m_item ".
+$qtyk = mysqli_query($koneksi, "SELECT * FROM m_item ".
 						"WHERE kd = '$itemkd'");
-$rtyk = mysql_fetch_assoc($qtyk);
+$rtyk = mysqli_fetch_assoc($qtyk);
 $nomer = $nomer + 1;
 $e_kd = nosql($rtyk['kd']);
 $e_nama = balikin($rtyk['nama']);
@@ -169,28 +169,28 @@ ob_start();
 
 
 //update testimoni
-$qku = mysql_query("SELECT AVG(nilai_kualitas_no) AS nkualitas, ".
+$qku = mysqli_query($koneksi, "SELECT AVG(nilai_kualitas_no) AS nkualitas, ".
 						"AVG(nilai_manfaat_no) AS nmanfaat ".
 						"FROM member_testimoni ".
 						"WHERE item_kd = '$itemkd' ".
 						"ORDER BY postdate DESC");
-$rku = mysql_fetch_assoc($qku);
-$tku = mysql_num_rows($qku);
+$rku = mysqli_fetch_assoc($qku);
+$tku = mysqli_num_rows($qku);
 $nkualitas = nosql($rku['nkualitas']);
 $nmanfaat = nosql($rku['nmanfaat']);
 
 
 //update
-mysql_query("UPDATE m_item SET jml_kualitas = '$nkualitas', ".
+mysqli_query($koneksi, "UPDATE m_item SET jml_kualitas = '$nkualitas', ".
 				"jml_manfaat = '$nmanfaat' ".
 				"WHERE kd = '$itemkd'");
 
 
 
 //detail e
-$qtyk = mysql_query("SELECT * FROM m_item ".
+$qtyk = mysqli_query($koneksi, "SELECT * FROM m_item ".
 						"WHERE kd = '$itemkd'");
-$rtyk = mysql_fetch_assoc($qtyk);
+$rtyk = mysqli_fetch_assoc($qtyk);
 $nomer = $nomer + 1;
 $e_kd = nosql($rtyk['kd']);
 $e_nama = balikin($rtyk['nama']);
@@ -586,7 +586,7 @@ $(document).ready(function(){
 
 <?php
 //update jumlah dilihat
-mysql_query("UPDATE m_item SET jml_dilihat = jml_dilihat + 1 ".
+mysqli_query($koneksi, "UPDATE m_item SET jml_dilihat = jml_dilihat + 1 ".
 				"WHERE kd = '$itemkd'");
 
 

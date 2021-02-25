@@ -43,11 +43,11 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 
 
 	//ketahui 
-	$qku = mysql_query("SELECT * FROM member_order ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM member_order ".
 							"WHERE member_kd = '$sesikd' ".
 							"AND kd = '$notakd'");
-	$rku = mysql_fetch_assoc($qku);
-	$tku = mysql_num_rows($qku);
+	$rku = mysqli_fetch_assoc($qku);
+	$tku = mysqli_num_rows($qku);
 	$kecamatan = balikin($rku['penerima_kecamatan']);
 	$kabupaten = balikin($rku['penerima_kabupaten']);
 	$propinsi = balikin($rku['penerima_propinsi']);
@@ -86,7 +86,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 
 
 	//update ...
-	mysql_query("UPDATE member_order SET penerima_nama = '$e_nama', ".
+	mysqli_query($koneksi, "UPDATE member_order SET penerima_nama = '$e_nama', ".
 					"penerima_telp = '$e_telp', ".
 					"penerima_kelurahan = '$f_kelurahan', ".
 					"penerima_alamat = '$f_alamat', ".

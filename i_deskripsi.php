@@ -15,8 +15,8 @@
  
 
 //detail
-$qkud = mysql_query("SELECT * FROM m_profil");
-$rkud = mysql_fetch_assoc($qkud);
+$qkud = mysqli_query($koneksi, "SELECT * FROM m_profil");
+$rkud = mysqli_fetch_assoc($qkud);
 $kud_nama = balikin($rkud['nama']);
 $kud_tagline = balikin($rkud['tagline']);
 $kud_header = balikin($rkud['filex_header']);

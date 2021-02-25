@@ -187,12 +187,12 @@ if (empty($s))
 						"ORDER BY postdate DESC";
 		$sqlresult = $sqlcount;
 
-		$count = mysql_num_rows(mysql_query($sqlcount));
+		$count = mysqli_num_rows(mysqli_query($sqlcount));
 		$pages = $p->findPages($count, $limit);
-		$result = mysql_query("$sqlresult LIMIT ".$start.", ".$limit);
+		$result = mysqli_query($koneksi, "$sqlresult LIMIT ".$start.", ".$limit);
 		$target = "$filenya?crkd=$crkd&crtipe=$crtipe&kunci=$kunci";
 		$pagelist = $p->pageList($_GET['page'], $pages, $target);
-		$data = mysql_fetch_array($result);
+		$data = mysqli_fetch_array($result);
 		}
 
 
@@ -206,27 +206,27 @@ if (empty($s))
 						"ORDER BY postdate DESC";
 		$sqlresult = $sqlcount;
 
-		$count = mysql_num_rows(mysql_query($sqlcount));
+		$count = mysqli_num_rows(mysqli_query($sqlcount));
 		$pages = $p->findPages($count, $limit);
-		$result = mysql_query("$sqlresult LIMIT ".$start.", ".$limit);
+		$result = mysqli_query($koneksi, "$sqlresult LIMIT ".$start.", ".$limit);
 		$pagelist = $p->pageList($_GET['page'], $pages, $target);
-		$data = mysql_fetch_array($result);
+		$data = mysqli_fetch_array($result);
 		}
 
 	if ($count != 0)
 		{
 		//rata2 nilai
-		$qyuk = mysql_query("SELECT AVG(nilai_kualitas_no) AS total ".
+		$qyuk = mysqli_query($koneksi, "SELECT AVG(nilai_kualitas_no) AS total ".
 								"FROM member_testimoni");
-		$ryuk = mysql_fetch_assoc($qyuk);
+		$ryuk = mysqli_fetch_assoc($qyuk);
 		$yuk_kualitas_no = round(nosql($ryuk['total']));
 		
 		
 		
 		//rata2 nilai
-		$qyuk = mysql_query("SELECT AVG(nilai_manfaat_no) AS total ".
+		$qyuk = mysqli_query($koneksi, "SELECT AVG(nilai_manfaat_no) AS total ".
 								"FROM member_testimoni");
-		$ryuk = mysql_fetch_assoc($qyuk);
+		$ryuk = mysqli_fetch_assoc($qyuk);
 		$yuk_manfaat_no = round(nosql($ryuk['total']));
 		
 		
@@ -326,7 +326,7 @@ if (empty($s))
 			<td>'.$i_member_nama.'</td>
 	    	</tr>';
 			}
-		while ($data = mysql_fetch_assoc($result));
+		while ($data = mysqli_fetch_assoc($result));
 
 		echo '</tbody>
 		  </table>

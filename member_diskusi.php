@@ -148,11 +148,11 @@ echo '<form name="formx" id="formx" action="'.$filenya.'" enctype="multipart/for
 
 
 //query
-$q = mysql_query("SELECT * FROM member_diskusi ".
+$q = mysqli_query($koneksi, "SELECT * FROM member_diskusi ".
 					"WHERE member_kd = '$sesikd' ".
 					"ORDER BY postdate DESC");
-$row = mysql_fetch_assoc($q);
-$total = mysql_num_rows($q);
+$row = mysqli_fetch_assoc($q);
+$total = mysqli_num_rows($q);
 
 if (!empty($total))
 	{
@@ -221,7 +221,7 @@ do
 		</td>
         </tr>';
 		}
-	while ($row = mysql_fetch_assoc($q));
+	while ($row = mysqli_fetch_assoc($q));
 
 	echo '</tbody>
 	  </table>

@@ -54,7 +54,7 @@ if ($_POST['btnSMP'])
 	else
 		{
 		//perintah SQL
-		mysql_query("UPDATE m_cara_order SET isi = '$e_isi', ".
+		mysqli_query($koneksi, "UPDATE m_cara_order SET isi = '$e_isi', ".
 						"postdate = '$today'");
 
 
@@ -93,8 +93,8 @@ echo '<form action="'.$filenya.'" enctype="multipart/form-data" method="post" na
 
 
 //detail
-$qku = mysql_query("SELECT * FROM m_cara_order");
-$rku = mysql_fetch_assoc($qku);
+$qku = mysqli_query($koneksi, "SELECT * FROM m_cara_order");
+$rku = mysqli_fetch_assoc($qku);
 $ku_judul = balikin($rku['judul']);
 $ku_isi = balikin($rku['isi']);
 

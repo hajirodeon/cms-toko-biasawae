@@ -281,7 +281,7 @@ function LoadTpl($template="")
 //xclose
 function xfree($str)
 	{
-	mysql_free_result($str);
+	mysqli_free_result($str);
 	}
 
 
@@ -289,7 +289,7 @@ function xfree($str)
 //xclose
 function xclose($str)
 	{
-	mysql_close($str);
+	mysqli_close($str);
 	}
 
 
@@ -1333,7 +1333,7 @@ $arrmanfaat = array(
 
 
 //VERSI /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-$versi = "CMS-TOKO-BIASAWAE v1.0";
+$versi = "CMS-TOKO-BIASAWAE v1.3";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

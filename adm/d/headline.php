@@ -44,12 +44,12 @@ $artkd = nosql($_REQUEST['artkd']);
 if ($s == "ganti")
 	{
 	//netralkan dulu...
-	mysql_query("UPDATE m_item SET headline_no = '' ".
+	mysqli_query($koneksi, "UPDATE m_item SET headline_no = '' ".
 					"WHERE headline_no = '$hkd'");
 	
 	
 	//update
-	mysql_query("UPDATE m_item SET headline_no = '$hkd' ".
+	mysqli_query($koneksi, "UPDATE m_item SET headline_no = '$hkd' ".
 					"WHERE kd = '$artkd'");
 					
 					
@@ -110,12 +110,12 @@ if (!empty($hkd))
 					"ORDER BY postdate DESC";
 	$sqlresult = $sqlcount;
 
-	$count = mysql_num_rows(mysql_query($sqlcount));
+	$count = mysqli_num_rows(mysqli_query($sqlcount));
 	$pages = $p->findPages($count, $limit);
-	$result = mysql_query("$sqlresult LIMIT ".$start.", ".$limit);
+	$result = mysqli_query($koneksi, "$sqlresult LIMIT ".$start.", ".$limit);
 	$target = "$filenya?hkd=$hkd";
 	$pagelist = $p->pageList($_GET['page'], $pages, $target);
-	$data = mysql_fetch_array($result);
+	$data = mysqli_fetch_array($result);
 
 
 	if ($count != 0)
@@ -169,7 +169,7 @@ if (!empty($hkd))
 			</td>
     		</tr>';
 			}
-		while ($data = mysql_fetch_assoc($result));
+		while ($data = mysqli_fetch_assoc($result));
 
 		echo '</tbody>
 		  </table>
@@ -203,10 +203,10 @@ else
 		
 		
 		//detail artikelnya
-		$qku = mysql_query("SELECT * FROM m_item ".
+		$qku = mysqli_query($koneksi, "SELECT * FROM m_item ".
 								"WHERE headline_no = '$k'");
-		$rku = mysql_fetch_assoc($qku);
-		$tku = mysql_num_rows($qku);
+		$rku = mysqli_fetch_assoc($qku);
+		$tku = mysqli_num_rows($qku);
 		
 		//jika ada
 		if (!empty($tku))

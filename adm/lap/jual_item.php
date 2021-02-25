@@ -75,12 +75,12 @@ $sqlcount = "SELECT member_order.*, member_order_detail.*, m_item.*, m_item.nama
 
 $sqlresult = $sqlcount;
 
-$count = mysql_num_rows(mysql_query($sqlcount));
+$count = mysqli_num_rows(mysqli_query($sqlcount));
 $pages = $p->findPages($count, $limit);
-$result = mysql_query("$sqlresult LIMIT ".$start.", ".$limit);
+$result = mysqli_query($koneksi, "$sqlresult LIMIT ".$start.", ".$limit);
 $target = "$filenya?brgkd=$brgkd&xbln1=$xbln1&xthn1=$xthn1";
 $pagelist = $p->pageList($_GET['page'], $pages, $target);
-$data = mysql_fetch_array($result);
+$data = mysqli_fetch_array($result);
 
 //nilai data
 $brg_kode = nosql($data['kode']);
@@ -132,18 +132,18 @@ echo '</select>,
 echo "<select name=\"item\" onChange=\"MM_jumpMenu('self',this,0)\" class=\"btn btn-warning\">";
 
 //itemnya
-$qthnx = mysql_query("SELECT * FROM m_item ".
+$qthnx = mysqli_query($koneksi, "SELECT * FROM m_item ".
 						"WHERE kd = '$brgkd'");
-$rthnx = mysql_fetch_assoc($qthnx);
+$rthnx = mysqli_fetch_assoc($qthnx);
 $item_nama = balikin($rthnx['nama']);
 
 
 echo '<option value="'.$brgkd.'" selected>'.$item_nama.'</option>';
 
 //query
-$qthn = mysql_query("SELECT * FROM m_item ".
+$qthn = mysqli_query($koneksi, "SELECT * FROM m_item ".
 						"ORDER BY nama ASC");
-$rthn = mysql_fetch_assoc($qthn);
+$rthn = mysqli_fetch_assoc($qthn);
 
 do
 	{
@@ -153,7 +153,7 @@ do
 	
 	echo '<option value="'.$filenya.'?xbln1='.$xbln1.'&xthn1='.$xthn1.'&brgkd='.$x_kd.'">'.$x_thn.'</option>';
 	}
-while ($rthn = mysql_fetch_assoc($qthn));
+while ($rthn = mysqli_fetch_assoc($qthn));
 
 echo '</select>
 </p>
@@ -215,7 +215,7 @@ else
 			<td>'.$y_qty.'</td>
 	        </tr>';
 			}
-		while ($data = mysql_fetch_assoc($result));
+		while ($data = mysqli_fetch_assoc($result));
 
 		echo '</table>
 

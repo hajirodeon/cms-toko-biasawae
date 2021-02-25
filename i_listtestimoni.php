@@ -15,9 +15,9 @@
  
 
 //daftar testimoni
-$qku = mysql_query("SELECT * FROM member_testimoni ".
+$qku = mysqli_query($koneksi, "SELECT * FROM member_testimoni ".
 						"ORDER BY postdate DESC LIMIT 0,50");
-$rku = mysql_fetch_assoc($qku);
+$rku = mysqli_fetch_assoc($qku);
 
 
 do 
@@ -34,9 +34,9 @@ do
 	
 	
 	//detail
-	$qyuk = mysql_query("SELECT * FROM m_item ".
+	$qyuk = mysqli_query($koneksi, "SELECT * FROM m_item ".
 							"WHERE kd = '$e_itemkd'");
-	$ryuk = mysql_fetch_assoc($qyuk);
+	$ryuk = mysqli_fetch_assoc($qyuk);
 	$yuk_filex1 = balikin($ryuk['filex1']);
 
 	echo "<b>$e_mbnama :</b>
@@ -95,5 +95,5 @@ do
 	<hr>';
 
 	}
-while ($rku = mysql_fetch_assoc($qku));
+while ($rku = mysqli_fetch_assoc($qku));
 ?>

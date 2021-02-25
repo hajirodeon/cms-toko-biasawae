@@ -62,14 +62,14 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 	else
 		{
 		//query
-		$q = mysql_query("SELECT * FROM m_member ".
+		$q = mysqli_query($koneksi, "SELECT * FROM m_member ".
 							"WHERE nama = '$e_nama' ".
 							"AND usernamex = '$e_email' ".
 							"AND tmp_lahir = '$e_tmp_lahir' ".
 							"AND tgl_lahir = '$e_tgl_lahir' ".
 							"AND kelamin = '$e_kelamin'");
-		$row = mysql_fetch_assoc($q);
-		$total = mysql_num_rows($q);
+		$row = mysqli_fetch_assoc($q);
+		$total = mysqli_num_rows($q);
 		$kd = nosql($row['kd']);
 
 		//ada 
@@ -81,7 +81,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 			
 			
 			//update database
-			mysql_query("UPDATE m_member SET passwordx = '$e_passx' ".
+			mysqli_query($koneksi, "UPDATE m_member SET passwordx = '$e_passx' ".
 							"WHERE kd = '$kd'");
 			
 

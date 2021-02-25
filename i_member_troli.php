@@ -35,9 +35,9 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 	$jmlku = cegah($_GET['jmlku']);
 
 	//detail e
-	$qtyk = mysql_query("SELECT * FROM m_item ".
+	$qtyk = mysqli_query($koneksi, "SELECT * FROM m_item ".
 							"WHERE kd = '$itemkd'");
-	$rtyk = mysql_fetch_assoc($qtyk);
+	$rtyk = mysqli_fetch_assoc($qtyk);
 	$e_nama = balikin($rtyk['nama']);
 	$e_isi = balikin($rtyk['isi']);
 	$e_berat = nosql($rtyk['berat']);
@@ -46,15 +46,15 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 
 
 	//ketahui detail sebelumnya...
-	$qku = mysql_query("SELECT * FROM member_order_detail ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 							"WHERE kd = '$detailkd'");
-	$rku = mysql_fetch_assoc($qku);
+	$rku = mysqli_fetch_assoc($qku);
 	$ku_jml = nosql($rku['jumlah']);
 
 
 
 	//netralkan dulu, stock...
-	mysql_query("UPDATE m_item SET jml = jml + '$ku_jml' ".
+	mysqli_query($koneksi, "UPDATE m_item SET jml = jml + '$ku_jml' ".
 					"WHERE kd = '$itemkd'");
 
 
@@ -69,7 +69,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 
 
 	//update jumlah...
-	mysql_query("UPDATE member_order_detail SET jumlah = '$jmlku', ".
+	mysqli_query($koneksi, "UPDATE member_order_detail SET jumlah = '$jmlku', ".
 					"subtotal = '$e_subtotal', ".
 					"subtotal_berat = '$e_subtotal_berat', ".
 					"postdate = '$today' ".
@@ -80,7 +80,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 
 
 	//kurangi stock
-	mysql_query("UPDATE m_item SET jml = jml - '$jmlku' ".
+	mysqli_query($koneksi, "UPDATE m_item SET jml = jml - '$jmlku' ".
 					"WHERE kd = '$itemkd'");
 
 
@@ -104,23 +104,23 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'hapus'))
 
 
 	//ketahui detail sebelumnya...
-	$qku = mysql_query("SELECT * FROM member_order_detail ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 							"WHERE kd = '$detailkd'");
-	$rku = mysql_fetch_assoc($qku);
+	$rku = mysqli_fetch_assoc($qku);
 	$ku_itemkd = nosql($rku['item_kd']);
 	$ku_jml = nosql($rku['jumlah']);
 	
 	//detail e
-	$qtyk = mysql_query("SELECT * FROM m_item ".
+	$qtyk = mysqli_query($koneksi, "SELECT * FROM m_item ".
 							"WHERE kd = '$ku_itemkd'");
-	$rtyk = mysql_fetch_assoc($qtyk);
+	$rtyk = mysqli_fetch_assoc($qtyk);
 	$e_jml = nosql($rtyk['jml']);
 
 	
 
 
 	//netralkan dulu, stock...
-	mysql_query("UPDATE m_item SET jml = jml + '$ku_jml' ".
+	mysqli_query($koneksi, "UPDATE m_item SET jml = jml + '$ku_jml' ".
 					"WHERE kd = '$itemkd'");
 
 
@@ -130,7 +130,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'hapus'))
 
 
 	//hapus
-	mysql_query("DELETE FROM member_order_detail ".
+	mysqli_query($koneksi, "DELETE FROM member_order_detail ".
 							"WHERE kd = '$detailkd'");
 
 	?>
@@ -169,9 +169,9 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'subtotal'))
 
 
 	//ketahui detail sebelumnya...
-	$qku = mysql_query("SELECT * FROM member_order_detail ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 							"WHERE kd = '$detailkd'");
-	$rku = mysql_fetch_assoc($qku);
+	$rku = mysqli_fetch_assoc($qku);
 	$ku_subtotal = nosql($rku['subtotal']);
 
 	echo xduit2($ku_subtotal);
@@ -198,11 +198,11 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'total'))
 
 
 	//ketahui detail sebelumnya...
-	$qku = mysql_query("SELECT SUM(subtotal) AS total ".
+	$qku = mysqli_query($koneksi, "SELECT SUM(subtotal) AS total ".
 							"FROM member_order_detail ".
 							"WHERE member_kd = '$sesikd' ".
 							"AND nota_kd = '$notakd'");
-	$rku = mysql_fetch_assoc($qku);
+	$rku = mysqli_fetch_assoc($qku);
 	$ku_subtotal = nosql($rku['total']);
 	$nilku =  xduit2($ku_subtotal);
 
@@ -210,7 +210,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'total'))
 
 
 	//update
-	mysql_query("UPDATE member_order SET subtotal = '$ku_subtotal' ".
+	mysqli_query($koneksi, "UPDATE member_order SET subtotal = '$ku_subtotal' ".
 					"WHERE member_kd = '$sesikd' ".
 					"AND kd = '$notakd'");
 
@@ -241,23 +241,23 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'rincian'))
 
 
 	//ketahui detail sebelumnya...
-	$qku = mysql_query("SELECT * FROM member_order_detail ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 							"WHERE member_kd = '$sesikd' ".
 							"AND nota_kd = '$notakd'");
-	$rku = mysql_fetch_assoc($qku);
-	$tku = mysql_num_rows($qku);
+	$rku = mysqli_fetch_assoc($qku);
+	$tku = mysqli_num_rows($qku);
 
 
 
 
 
 	//ketahui detail sebelumnya...
-	$qku = mysql_query("SELECT SUM(subtotal_berat) AS total_berat, ".
+	$qku = mysqli_query($koneksi, "SELECT SUM(subtotal_berat) AS total_berat, ".
 							"SUM(jumlah) AS total_qty ".
 							"FROM member_order_detail ".
 							"WHERE member_kd = '$sesikd' ".
 							"AND nota_kd = '$notakd'");
-	$rku = mysql_fetch_assoc($qku);
+	$rku = mysqli_fetch_assoc($qku);
 	$ku_total_berat = nosql($rku['total_berat']);
 	$ku_total_qty = nosql($rku['total_qty']);
 	$ku_total_jenis = $tku;
@@ -268,7 +268,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'rincian'))
 
 
 	//update
-	mysql_query("UPDATE member_order SET barang_jml_jenis = '$ku_total_jenis', ".
+	mysqli_query($koneksi, "UPDATE member_order SET barang_jml_jenis = '$ku_total_jenis', ".
 					"barang_qty = '$ku_total_qty', ".
 					"barang_berat = '$ku_total_berat' ".
 					"WHERE member_kd = '$sesikd' ".

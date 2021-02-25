@@ -115,10 +115,10 @@ if ($_POST['btnSMP'])
 	$kecamatan1 = nosql($_POST['kecamatan']);
 	
 	//detail
-	$qku = mysql_query("SELECT * FROM provinsi ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM provinsi ".
 						"WHERE id_prov = '$provinsi1'");
-	$rku = mysql_fetch_assoc($qku);
-	$tku = mysql_num_rows($qku);
+	$rku = mysqli_fetch_assoc($qku);
+	$tku = mysqli_num_rows($qku);
 	
 	//jika ada
 	if (!empty($tku))
@@ -133,10 +133,10 @@ if ($_POST['btnSMP'])
 	
 	
 	//detail
-	$qku = mysql_query("SELECT * FROM kabupaten ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM kabupaten ".
 						"WHERE id_kab = '$kabupaten1'");
-	$rku = mysql_fetch_assoc($qku);
-	$tku = mysql_num_rows($qku);
+	$rku = mysqli_fetch_assoc($qku);
+	$tku = mysqli_num_rows($qku);
 	
 	//jika ada
 	if (!empty($tku))
@@ -151,10 +151,10 @@ if ($_POST['btnSMP'])
 	
 	
 	//detail
-	$qku = mysql_query("SELECT * FROM kecamatan ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM kecamatan ".
 						"WHERE id_kec = '$kecamatan1'");
-	$rku = mysql_fetch_assoc($qku);
-	$tku = mysql_num_rows($qku);
+	$rku = mysqli_fetch_assoc($qku);
+	$tku = mysqli_num_rows($qku);
 	
 	//jika ada
 	if (!empty($tku))
@@ -211,7 +211,7 @@ if ($_POST['btnSMP'])
 
 
 		//update
-		mysql_query("UPDATE m_member SET nama = '$e_nama', ".
+		mysqli_query($koneksi, "UPDATE m_member SET nama = '$e_nama', ".
 						"tmp_lahir = '$e_tmp_lahir', ".
 						"tgl_lahir = '$e_tgl_lahir', ".
 						"kelamin = '$e_kelamin', ".
@@ -276,18 +276,18 @@ if ($_POST['btnSMP2'])
 	else
 		{
 		//query
-		$q = mysql_query("SELECT * FROM m_member ".
+		$q = mysqli_query($koneksi, "SELECT * FROM m_member ".
 							"WHERE kd = '$kd6_session' ".
 							"AND usernamex = '$username6_session' ".
 							"AND passwordx = '$passlama'");
-		$row = mysql_fetch_assoc($q);
-		$total = mysql_num_rows($q);
+		$row = mysqli_fetch_assoc($q);
+		$total = mysqli_num_rows($q);
 
 		//cek
 		if ($total != 0)
 			{
 			//perintah SQL
-			mysql_query("UPDATE m_member SET passwordx = '$passbaru' ".
+			mysqli_query($koneksi, "UPDATE m_member SET passwordx = '$passbaru' ".
 							"WHERE kd = '$kd6_session' ".
 							"AND usernamex = '$username6_session'");
 
@@ -494,9 +494,9 @@ echo '<div class="container">
 							
 							
 							//detail
-							$qku = mysql_query("SELECT * FROM m_member ".
+							$qku = mysqli_query($koneksi, "SELECT * FROM m_member ".
 													"WHERE kd = '$kd6_session'");
-							$rku = mysql_fetch_assoc($qku);
+							$rku = mysqli_fetch_assoc($qku);
 							$ku_nama = balikin($rku['nama']);
 							$ku_tagline = balikin($rku['tagline']);
 							$ku_telp = balikin($rku['telp']);
@@ -522,23 +522,23 @@ echo '<div class="container">
 							
 							
 							//detailkan...	
-							$qkux = mysql_query("SELECT * FROM provinsi ".
+							$qkux = mysqli_query($koneksi, "SELECT * FROM provinsi ".
 													"WHERE id_prov = '$ku_propinsix'");
-							$rkux = mysql_fetch_assoc($qkux);
+							$rkux = mysqli_fetch_assoc($qkux);
 							$ku_propinsi = balikin($rkux['nama']);
 							
 							
 							//detailkan...	
-							$qkux = mysql_query("SELECT * FROM kabupaten ".
+							$qkux = mysqli_query($koneksi, "SELECT * FROM kabupaten ".
 													"WHERE id_kab = '$ku_kabupatenx'");
-							$rkux = mysql_fetch_assoc($qkux);
+							$rkux = mysqli_fetch_assoc($qkux);
 							$ku_kabupaten = balikin($rkux['nama']);
 							
 							
 							//detailkan...	
-							$qkux = mysql_query("SELECT * FROM kecamatan ".
+							$qkux = mysqli_query($koneksi, "SELECT * FROM kecamatan ".
 													"WHERE id_kec = '$ku_kecamatanx'");
-							$rkux = mysql_fetch_assoc($qkux);
+							$rkux = mysqli_fetch_assoc($qkux);
 							$ku_kecamatan = balikin($rkux['nama']);
 							
 							
@@ -621,9 +621,9 @@ echo '<div class="container">
 							Propinsi : 
 							<br>';
 							//Dapatkan semua 
-							$query = mysql_query("SELECT * FROM provinsi ".
+							$query = mysqli_query($koneksi, "SELECT * FROM provinsi ".
 													"ORDER BY nama ASC");
-							$row = mysql_fetch_assoc($query);
+							$row = mysqli_fetch_assoc($query);
 							
 							
 							echo '<select name="provinsi" id="provinsi" class="btn btn-info">
@@ -636,7 +636,7 @@ echo '<div class="container">
 								 
 							    echo '<option value="'.$r_idprov.'">'.$r_nama.'</option>';
 								}
-							while ($row = mysql_fetch_assoc($query));
+							while ($row = mysqli_fetch_assoc($query));
 							
 							echo '</select>
 							</p>

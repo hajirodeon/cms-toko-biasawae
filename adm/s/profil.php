@@ -67,7 +67,7 @@ if ($_POST['btnSMP'])
 	else
 		{
 		//perintah SQL
-		mysql_query("UPDATE m_profil SET nama = '$e_nama', ".
+		mysqli_query($koneksi, "UPDATE m_profil SET nama = '$e_nama', ".
 						"tagline = '$e_tagline', ".
 						"telp = '$e_telp', ".
 						"email = '$e_email', ".
@@ -133,7 +133,7 @@ if ($_POST['btnSMP2'])
 			copy($_FILES['filex_foto2']['tmp_name'],"../../filebox/toko/$namabaru2");
 			
 			//perintah SQL
-			mysql_query("UPDATE m_profil SET filex_logo = '$namabaru1', ".
+			mysqli_query($koneksi, "UPDATE m_profil SET filex_logo = '$namabaru1', ".
 							"filex_header = '$namabaru2'");
 
 
@@ -188,7 +188,7 @@ if ($_POST['btnSMP3'])
 	else
 		{
 		//perintah SQL
-		mysql_query("UPDATE m_profil SET judul = '$e_title', ".
+		mysqli_query($koneksi, "UPDATE m_profil SET judul = '$e_title', ".
 						"keyword = '$e_keyword', ".
 						"deskripsi = '$e_description'");
 
@@ -276,8 +276,8 @@ echo '<form action="'.$filenya.'" enctype="multipart/form-data" method="post" na
 
 
 //detail
-$qku = mysql_query("SELECT * FROM m_profil");
-$rku = mysql_fetch_assoc($qku);
+$qku = mysqli_query($koneksi, "SELECT * FROM m_profil");
+$rku = mysqli_fetch_assoc($qku);
 $ku_nama = balikin($rku['nama']);
 $ku_tagline = balikin($rku['tagline']);
 $ku_telp = balikin($rku['telp']);
@@ -290,23 +290,23 @@ $ku_kelurahan = balikin($rku['kelurahan']);
 
 
 //detailkan...	
-$qkux = mysql_query("SELECT * FROM provinsi ".
+$qkux = mysqli_query($koneksi, "SELECT * FROM provinsi ".
 						"WHERE id_prov = '$ku_propinsix'");
-$rkux = mysql_fetch_assoc($qkux);
+$rkux = mysqli_fetch_assoc($qkux);
 $ku_propinsi = balikin($rkux['nama']);
 
 
 //detailkan...	
-$qkux = mysql_query("SELECT * FROM kabupaten ".
+$qkux = mysqli_query($koneksi, "SELECT * FROM kabupaten ".
 						"WHERE id_kab = '$ku_kabupatenx'");
-$rkux = mysql_fetch_assoc($qkux);
+$rkux = mysqli_fetch_assoc($qkux);
 $ku_kabupaten = balikin($rkux['nama']);
 
 
 //detailkan...	
-$qkux = mysql_query("SELECT * FROM kecamatan ".
+$qkux = mysqli_query($koneksi, "SELECT * FROM kecamatan ".
 						"WHERE id_kec = '$ku_kecamatanx'");
-$rkux = mysql_fetch_assoc($qkux);
+$rkux = mysqli_fetch_assoc($qkux);
 $ku_kecamatan = balikin($rkux['nama']);
 
 
@@ -371,9 +371,9 @@ Web :
 Propinsi : 
 <br>';
 //Dapatkan semua 
-$query = mysql_query("SELECT * FROM provinsi ".
+$query = mysqli_query($koneksi, "SELECT * FROM provinsi ".
 						"ORDER BY nama ASC");
-$row = mysql_fetch_assoc($query);
+$row = mysqli_fetch_assoc($query);
 
 
 echo '<select name="provinsi" id="provinsi" class="btn btn-warning">
@@ -386,7 +386,7 @@ do
 	 
     echo '<option value="'.$r_idprov.'">'.$r_nama.'</option>';
 	}
-while ($row = mysql_fetch_assoc($query));
+while ($row = mysqli_fetch_assoc($query));
 
 echo '</select>
 </p>

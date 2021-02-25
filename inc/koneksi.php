@@ -15,8 +15,17 @@
  
 
 //KONEKSI ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-$koneksi = mysql_connect($xhostname, $xusername, $xpassword) or die(mysql_error());
-mysql_select_db($xdatabase);
+$koneksi = mysqli_connect($xhostname, $xusername, $xpassword, $xdatabase);
+
+
+// Check connection
+if (mysqli_connect_errno()) {
+  echo "Koneksi ERROR: " . mysqli_connect_error();
+  exit();
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 
@@ -27,8 +36,8 @@ $temaku = "tema1";
 
 
 //detail
-$qkux = mysql_query("SELECT * FROM m_profil");
-$rkux = mysql_fetch_assoc($qkux);
+$qkux = mysqli_query($koneksi, "SELECT * FROM m_profil");
+$rkux = mysqli_fetch_assoc($qkux);
 $toko_nama = balikin($rkux['nama']);
 $toko_keyword = balikin($rkux['keyword']);
 $toko_deskripsi = balikin($rkux['deskripsi']);

@@ -99,8 +99,8 @@ ob_start();
 
 //view //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //detail
-$qku = mysql_query("SELECT * FROM m_pembayaran");
-$rku = mysql_fetch_assoc($qku);
+$qku = mysqli_query($koneksi, "SELECT * FROM m_pembayaran");
+$rku = mysqli_fetch_assoc($qku);
 $ku_judul = balikin($rku['judul']);
 $ku_isi = balikin($rku['isi']);
 

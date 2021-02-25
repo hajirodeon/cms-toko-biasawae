@@ -77,7 +77,7 @@ if ($_POST['btnSMP2'])
 			copy($_FILES['filex_foto']['tmp_name'],"filebox/konfirmasi/$namabaru1");
 
 			//perintah SQL
-			mysql_query("UPDATE member_order SET tgl_bayar = '$e_tgl_bayar', ".
+			mysqli_query($koneksi, "UPDATE member_order SET tgl_bayar = '$e_tgl_bayar', ".
 							"filex_bayar = '$namabaru1', ".
 							"konfirmasi = 'true' ".
 							"WHERE member_kd = '$sesikd' ".
@@ -211,11 +211,11 @@ $notakd = nosql($_REQUEST['notakd']);
 if (!empty($notakd))
 	{
 	//query
-	$q = mysql_query("SELECT * FROM member_order ".
+	$q = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND kd = '$notakd'");
-	$row = mysql_fetch_assoc($q);
-	$total = mysql_num_rows($q);
+	$row = mysqli_fetch_assoc($q);
+	$total = mysqli_num_rows($q);
 	
 	if (!empty($total))
 		{
@@ -325,13 +325,13 @@ if (!empty($notakd))
 else
 	{
 	//query
-	$q = mysql_query("SELECT * FROM member_order ".
+	$q = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND penerima_nama <> '' ".
 						"AND konfirmasi = 'false' ".
 						"ORDER BY postdate DESC");
-	$row = mysql_fetch_assoc($q);
-	$total = mysql_num_rows($q);
+	$row = mysqli_fetch_assoc($q);
+	$total = mysqli_num_rows($q);
 	
 	if (!empty($total))
 		{
@@ -403,7 +403,7 @@ else
 				</td>
 		        </tr>';
 				}
-			while ($row = mysql_fetch_assoc($q));
+			while ($row = mysqli_fetch_assoc($q));
 	
 			echo '</tbody>
 			  </table>

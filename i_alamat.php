@@ -38,9 +38,9 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'detail'))
 	$_SESSION['propkd'] = $propkd;	
 	
 	
-	$query = mysql_query("SELECT * FROM provinsi ".
+	$query = mysqli_query($koneksi, "SELECT * FROM provinsi ".
 							"WHERE id_prov = '$propkd'");
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$d_nama = balikin($row['nama']);
 	
 	//echo $d_nama;
@@ -63,9 +63,9 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'detail2'))
 	$_SESSION['kabkd'] = $kabkd;
 	
 	
-	$query = mysql_query("SELECT * FROM kabupaten ".
+	$query = mysqli_query($koneksi, "SELECT * FROM kabupaten ".
 							"WHERE id_kab = '$kabkd'");
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$d_nama = balikin($row['nama']);
 	
 	//echo $d_nama;
@@ -90,9 +90,9 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'detail3'))
 	$_SESSION['keckd'] = $keckd;
 	
 	
-	$query = mysql_query("SELECT * FROM kecamatan ".
+	$query = mysqli_query($koneksi, "SELECT * FROM kecamatan ".
 							"WHERE id_kec = '$keckd'");
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$d_nama = balikin($row['nama']);
 	
 	//echo $d_nama;
@@ -116,23 +116,23 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'detail4'))
 	
 	
 	//asal
-	$query = mysql_query("SELECT * FROM m_profil");
-	$row = mysql_fetch_assoc($query);
+	$query = mysqli_query($koneksi, "SELECT * FROM m_profil");
+	$row = mysqli_fetch_assoc($query);
 	$r_propkd = nosql($row['propinsi']);
 	$r_kabkd = nosql($row['kabupaten']);
 	$r_keckd = nosql($row['kecamatan']);
 
 	//detail	
-	$query = mysql_query("SELECT * FROM provinsi ".
+	$query = mysqli_query($koneksi, "SELECT * FROM provinsi ".
 							"WHERE id_prov = '$r_propkd'");
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$d_propinsi = balikin($row['nama']);
 	$_SESSION['asal_propinsi'] = $d_propinsi;
 
 
-	$query = mysql_query("SELECT * FROM kabupaten ".
+	$query = mysqli_query($koneksi, "SELECT * FROM kabupaten ".
 							"WHERE id_kab = '$r_kabkd'");
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$d_kabupaten_ongkir_jne_yes = nosql($row['ongkir_jne_yes']);
 	$d_kabupaten_ongkir_jne_reg = nosql($row['ongkir_jne_reg']);
 	$d_kabupaten_ongkir_pos_express = nosql($row['ongkir_pos_express']);
@@ -143,9 +143,9 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'detail4'))
 	$_SESSION['asal_kabupaten'] = $d_kabupaten;
 
 
-	$query = mysql_query("SELECT * FROM kecamatan ".
+	$query = mysqli_query($koneksi, "SELECT * FROM kecamatan ".
 							"WHERE id_kec = '$r_keckd'");
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$d_kecamatan_ongkir_jne_yes = nosql($row['ongkir_jne_yes']);
 	$d_kecamatan_ongkir_jne_reg = nosql($row['ongkir_jne_reg']);
 	$d_kecamatan_ongkir_pos_express = nosql($row['ongkir_pos_express']);
@@ -161,18 +161,18 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'detail4'))
 
 	
 	//tujuan
-	$query = mysql_query("SELECT * FROM provinsi ".
+	$query = mysqli_query($koneksi, "SELECT * FROM provinsi ".
 							"WHERE id_prov = '$propkd'");
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$t_propinsi = balikin($row['nama']);
 	$_SESSION['tujuan_propinsi'] = $t_propinsi;
 	$_SESSION['tujuan_propkd'] = $propkd;
 	
 	
 	
-	$query = mysql_query("SELECT * FROM kabupaten ".
+	$query = mysqli_query($koneksi, "SELECT * FROM kabupaten ".
 							"WHERE id_kab = '$kabkd'");
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$t_kabupaten_ongkir_jne_yes = nosql($row['ongkir_jne_yes']);
 	$t_kabupaten_ongkir_jne_reg = nosql($row['ongkir_jne_reg']);
 	$t_kabupaten_ongkir_pos_express = nosql($row['ongkir_pos_express']);
@@ -183,9 +183,9 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'detail4'))
 	$_SESSION['tujuan_kabupaten'] = $t_kabupaten;
 	$_SESSION['tujuan_kabkd'] = $kabkd;
 
-	$query = mysql_query("SELECT * FROM kecamatan ".
+	$query = mysqli_query($koneksi, "SELECT * FROM kecamatan ".
 							"WHERE id_kec = '$keckd'");
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$t_kecamatan_ongkir_jne_yes = nosql($row['ongkir_jne_yes']);
 	$t_kecamatan_ongkir_jne_reg = nosql($row['ongkir_jne_reg']);
 	$t_kecamatan_ongkir_pos_express = nosql($row['ongkir_pos_express']);
@@ -200,7 +200,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'detail4'))
 
 
 	//update nota
-	mysql_query("UPDATE member_order SET penerima_propinsi = '$t_propinsi', ".
+	mysqli_query($koneksi, "UPDATE member_order SET penerima_propinsi = '$t_propinsi', ".
 					"penerima_kabupaten = '$t_kabupaten', ".
 					"penerima_kecamatan = '$t_kecamatan' ".
 					"WHERE kd = '$notakd'");
@@ -210,12 +210,12 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'detail4'))
 
 
 	//ongkir antar propinsi		
-	$query = mysql_query("SELECT * FROM ongkir_propinsi ".
+	$query = mysqli_query($koneksi, "SELECT * FROM ongkir_propinsi ".
 							"WHERE (propinsi1 = '$d_propinsi' ".
 							"AND propinsi2 = '$t_propinsi') ".
 							"OR (propinsi2 = '$d_propinsi' ".
 							"AND propinsi1 = '$t_propinsi')");
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	$p_ongkir_jne_yes = nosql($row['ongkir_jne_yes']);
 	$p_ongkir_jne_reg = nosql($row['ongkir_jne_reg']);
 	$p_ongkir_pos_express = nosql($row['ongkir_pos_express']);
@@ -242,18 +242,18 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'detail4'))
 	
 	//jika gak ada, gunakan dari rumus
 	//masukkan ke database
-	$qcc = mysql_query("SELECT * FROM ongkir_kota ".
+	$qcc = mysqli_query($koneksi, "SELECT * FROM ongkir_kota ".
 						"WHERE propinsi1 = '$d_propinsi' ".
 						"AND propinsi2 = '$t_propinsi' ".
 						"AND kota1 = '$d_kabupaten' ".
 						"AND kota2 = '$t_kabupaten'");
-	$tcc = mysql_num_rows($qcc);
+	$tcc = mysqli_num_rows($qcc);
 	
 	//jika null, insert
 	if (empty($tcc))
 		{
 		//query
-		mysql_query("INSERT INTO ongkir_kota(propinsi1, propinsi2, kota1, kota2, ".
+		mysqli_query($koneksi, "INSERT INTO ongkir_kota(propinsi1, propinsi2, kota1, kota2, ".
 						"ongkir_jne_yes, ongkir_jne_reg, ".
 						"ongkir_pos_express, ongkir_pos_kilat, ".
 						"ongkir_jnt_reg, ongkir_tiki_reg, postdate) VALUES ".
@@ -319,10 +319,10 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'detail4'))
 		<option value="'.$f_jasakirim.'">'.$f_jasakirim.'</option>';
 
 			//Dapatkan semua 
-			$query = mysql_query("SELECT * FROM m_jasa_kirim ".
+			$query = mysqli_query($koneksi, "SELECT * FROM m_jasa_kirim ".
 									"WHERE status = 'true' ".
 									"ORDER BY nama ASC");
-			$row = mysql_fetch_assoc($query);
+			$row = mysqli_fetch_assoc($query);
 
             do
             	{
@@ -379,7 +379,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'detail4'))
 				
                 echo '<option value="'.$kdku.'">'.$r_nama.' ['.xduit2($ongkirku).'/Kg]</option>';
 				}
-			while ($row = mysql_fetch_assoc($query));
+			while ($row = mysqli_fetch_assoc($query));
 
 
 	echo '</select>
@@ -428,9 +428,9 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 	
 
 	//ketahui total berat
-	$qyuk = mysql_query("SELECT * FROM member_order ".
+	$qyuk = mysqli_query($koneksi, "SELECT * FROM member_order ".
 							"WHERE kd = '$notakd'");
-	$ryuk = mysql_fetch_assoc($qyuk);
+	$ryuk = mysqli_fetch_assoc($qyuk);
 	$yuk_berat1 = nosql($ryuk['barang_berat']);
 	$yuk_subtotal = nosql($ryuk['subtotal']);
 	$yuk_kodeunik = nosql($ryuk['kodeunik']);
@@ -456,7 +456,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 	
 	
 	//update
-	mysql_query("UPDATE member_order SET jasakirim = '$e_jasakirim', ".
+	mysqli_query($koneksi, "UPDATE member_order SET jasakirim = '$e_jasakirim', ".
 					"jasakirim_ongkir = '$e_ongkirnya', ".
 					"jasakirim_ongkir_subtotal = '$e_subtotal', ".
 					"total = '$e_total_bayar' ".
@@ -499,9 +499,9 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'total'))
 
 
 	//ketahui rincian
-	$qyuk = mysql_query("SELECT * FROM member_order ".
+	$qyuk = mysqli_query($koneksi, "SELECT * FROM member_order ".
 							"WHERE kd = '$notakd'");
-	$ryuk = mysql_fetch_assoc($qyuk);
+	$ryuk = mysqli_fetch_assoc($qyuk);
 	$yuk_subtotal = nosql($ryuk['subtotal']);
 	$yuk_jasakirim = balikin($ryuk['jasakirim']);
 	$yuk_ongkirnya = nosql($ryuk['jasakirim_ongkir_subtotal']);
@@ -546,10 +546,10 @@ if(isset($_POST["id_provinsi"]) && !empty($_POST["id_provinsi"]))
 	{
 	echo '<option value="" selected></option>';
 	
-	$qku = mysql_query("SELECT * FROM kabupaten ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM kabupaten ".
 							"WHERE id_prov = '$id_provinsi' ".
   							"ORDER BY nama ASC");
-	$rku = mysql_fetch_assoc($qku);
+	$rku = mysqli_fetch_assoc($qku);
 
 	do
 		{
@@ -558,7 +558,7 @@ if(isset($_POST["id_provinsi"]) && !empty($_POST["id_provinsi"]))
 
 		echo '<option value="'.$ku_idkab.'">'.$ku_nama.'</option>';
 		}
-	while ($rku = mysql_fetch_assoc($qku));
+	while ($rku = mysqli_fetch_assoc($qku));
 
 	
 	exit();
@@ -571,10 +571,10 @@ if(isset($_POST["id_kabupaten"]) && !empty($_POST["id_kabupaten"]))
 	{
 	echo '<option value="" selected></option>';
 	
-	$qku = mysql_query("SELECT * FROM kecamatan ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM kecamatan ".
 							"WHERE id_kab = '$id_kabupaten' ".
   							"ORDER BY nama ASC");
-	$rku = mysql_fetch_assoc($qku);
+	$rku = mysqli_fetch_assoc($qku);
 
 	do
 		{
@@ -583,7 +583,7 @@ if(isset($_POST["id_kabupaten"]) && !empty($_POST["id_kabupaten"]))
 
 		echo '<option value="'.$ku_idkec.'">'.$ku_nama.'</option>';
 		}
-	while ($rku = mysql_fetch_assoc($qku));
+	while ($rku = mysqli_fetch_assoc($qku));
 	
 	exit();
   	}

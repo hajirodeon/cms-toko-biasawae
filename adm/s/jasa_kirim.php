@@ -53,7 +53,7 @@ if ($_POST['btnSMP'])
 
 
 		//sesuaikan
-		mysql_query("UPDATE m_jasa_kirim SET status = '$xtkx', ".
+		mysqli_query($koneksi, "UPDATE m_jasa_kirim SET status = '$xtkx', ".
 						"postdate = '$today' ".
 						"WHERE kd = '$xkdx'");
 		}
@@ -95,9 +95,9 @@ echo '<form action="'.$filenya.'" enctype="multipart/form-data" method="post" na
 
 
 //daftar
-$qku = mysql_query("SELECT * FROM m_jasa_kirim ".
+$qku = mysqli_query($koneksi, "SELECT * FROM m_jasa_kirim ".
 					"ORDER BY round(kode) ASC");
-$rku = mysql_fetch_assoc($qku);
+$rku = mysqli_fetch_assoc($qku);
 
 
 
@@ -182,7 +182,7 @@ echo '<div class="table-responsive">
 			</td>
 		    </tr>';
 			}
-		while ($rku = mysql_fetch_assoc($qku));
+		while ($rku = mysqli_fetch_assoc($qku));
 		
 
 echo '</tbody>

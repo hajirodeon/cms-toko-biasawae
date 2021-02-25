@@ -173,11 +173,11 @@ if ($_POST['btnSMP'])
 			if ($s == "baru")
 				{
 				//cek
-				$qcc = mysql_query("SELECT * FROM m_item ".
+				$qcc = mysqli_query($koneksi, "SELECT * FROM m_item ".
 										"WHERE kode = '$e_kode' ".
 										"OR nama = '$e_nama'");
-				$rcc = mysql_fetch_assoc($qcc);
-				$tcc = mysql_num_rows($qcc);
+				$rcc = mysqli_fetch_assoc($qcc);
+				$tcc = mysqli_num_rows($qcc);
 				
 				//nek ada
 				if ($tcc != 0)
@@ -190,7 +190,7 @@ if ($_POST['btnSMP'])
 				else
 					{
 					//insert
-					mysql_query("INSERT INTO m_item(kd, kode, nama, isi, harga, ".
+					mysqli_query($koneksi, "INSERT INTO m_item(kd, kode, nama, isi, harga, ".
 									"berat, kondisi, jml, jml_min, kategori, ".
 									"filex1, filex2, filex3, filex4, filex5, url_cantik, postdate) VALUES ".
 									"('$e_kd', '$e_kode', '$e_nama', '$e_isi', '$e_harga', ".
@@ -210,7 +210,7 @@ if ($_POST['btnSMP'])
 			//jika update
 			if ($s == "edit")
 				{
-				mysql_query("UPDATE m_item SET kode = '$e_kode', ".
+				mysqli_query($koneksi, "UPDATE m_item SET kode = '$e_kode', ".
 								"nama = '$e_nama', ".
 								"isi = '$e_isi', ".
 								"harga = '$e_harga', ".
@@ -269,7 +269,7 @@ if ($_POST['btnHPS'])
 		$kd = nosql($_POST["$yuhu"]);
 
 		//del
-		mysql_query("DELETE FROM m_item ".
+		mysqli_query($koneksi, "DELETE FROM m_item ".
 						"WHERE kd = '$kd'");
 		}
 
@@ -329,9 +329,9 @@ echo '<form action="'.$filenya.'" enctype="multipart/form-data" method="post" na
 if (($s == "baru") OR ($s == "edit"))
 	{
 	//edit
-	$qx = mysql_query("SELECT * FROM m_item ".
+	$qx = mysqli_query($koneksi, "SELECT * FROM m_item ".
 						"WHERE kd = '$kd'");
-	$rowx = mysql_fetch_assoc($qx);
+	$rowx = mysqli_fetch_assoc($qx);
 	$e_kd = nosql($rowx['kd']);
 	$e_kode = balikin($rowx['kode']);
 	$e_nama = balikin($rowx['nama']);
@@ -475,9 +475,9 @@ if (($s == "baru") OR ($s == "edit"))
 	<option value="'.$e_kategori.'" selected>'.$e_kategori.'</option>';
 	
 	//daftar kategori
-	$qku = mysql_query("SELECT * FROM m_kategori ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM m_kategori ".
 							"ORDER BY nama ASC");
-	$rku = mysql_fetch_assoc($qku);
+	$rku = mysqli_fetch_assoc($qku);
 	
 	do
 		{
@@ -486,7 +486,7 @@ if (($s == "baru") OR ($s == "edit"))
 		
 		echo '<option value="'.$ku_nama.'">'.$ku_nama.'</option>';
 		}
-	while ($rku = mysql_fetch_assoc($qku));
+	while ($rku = mysqli_fetch_assoc($qku));
 	
 	
 	echo '</select>
@@ -567,12 +567,12 @@ else
 						"ORDER BY kode ASC";
 		$sqlresult = $sqlcount;
 		
-		$count = mysql_num_rows(mysql_query($sqlcount));
+		$count = mysqli_num_rows(mysqli_query($sqlcount));
 		$pages = $p->findPages($count, $limit);
-		$result = mysql_query("$sqlresult LIMIT ".$start.", ".$limit);
+		$result = mysqli_query($koneksi, "$sqlresult LIMIT ".$start.", ".$limit);
 		$target = "$filenya?kategori=$kategori&kunci=$kunci";
 		$pagelist = $p->pageList($_GET['page'], $pages, $target);
-		$data = mysql_fetch_array($result);
+		$data = mysqli_fetch_array($result);
 		}
 
 	//jika ada kategori
@@ -587,12 +587,12 @@ else
 						"ORDER BY kode ASC";
 		$sqlresult = $sqlcount;
 		
-		$count = mysql_num_rows(mysql_query($sqlcount));
+		$count = mysqli_num_rows(mysqli_query($sqlcount));
 		$pages = $p->findPages($count, $limit);
-		$result = mysql_query("$sqlresult LIMIT ".$start.", ".$limit);
+		$result = mysqli_query($koneksi, "$sqlresult LIMIT ".$start.", ".$limit);
 		$target = "$filenya?kategori=$kategori&kunci=$kunci";
 		$pagelist = $p->pageList($_GET['page'], $pages, $target);
-		$data = mysql_fetch_array($result);
+		$data = mysqli_fetch_array($result);
 		}
 		
 	else
@@ -605,12 +605,12 @@ else
 						"ORDER BY kode ASC";
 		$sqlresult = $sqlcount;
 		
-		$count = mysql_num_rows(mysql_query($sqlcount));
+		$count = mysqli_num_rows(mysqli_query($sqlcount));
 		$pages = $p->findPages($count, $limit);
-		$result = mysql_query("$sqlresult LIMIT ".$start.", ".$limit);
+		$result = mysqli_query($koneksi, "$sqlresult LIMIT ".$start.", ".$limit);
 		$target = "$filenya?kategori=$kategori&kunci=$kunci";
 		$pagelist = $p->pageList($_GET['page'], $pages, $target);
-		$data = mysql_fetch_array($result);
+		$data = mysqli_fetch_array($result);
 		}
 	
 	
@@ -643,9 +643,9 @@ else
 	echo '<option value="'.$kategori.'" selected>'.$kategori.'</option>';
 	
 	//daftar kategori
-	$qku = mysql_query("SELECT * FROM m_kategori ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM m_kategori ".
 							"ORDER BY nama ASC");
-	$rku = mysql_fetch_assoc($qku);
+	$rku = mysqli_fetch_assoc($qku);
 	
 	do
 		{
@@ -656,13 +656,13 @@ else
 		
 		
 		//ketahui jumlah
-		$qyuk = mysql_query("SELECT * FROM m_item ".
+		$qyuk = mysqli_query($koneksi, "SELECT * FROM m_item ".
 								"WHERE kategori = '$ku_nama3'");
-		$tyuk = mysql_num_rows($qyuk);
+		$tyuk = mysqli_num_rows($qyuk);
 
 		echo'<option value="'.$filenya.'?kategori='.$ku_nama2.'">'.$ku_nama.' ['.$tyuk.']</option>';
 		}
-	while ($rku = mysql_fetch_assoc($qku));
+	while ($rku = mysqli_fetch_assoc($qku));
 
 
 	echo '</select>
@@ -730,7 +730,7 @@ else
 			
 			
 			//bikin url cantik
-			mysql_query("UPDATE m_item SET url_cantik = '$url_cantik' ".
+			mysqli_query($koneksi, "UPDATE m_item SET url_cantik = '$url_cantik' ".
 							"WHERE kd = '$e_kd'");
 	
 	
@@ -756,7 +756,7 @@ else
 			<td>'.$e_kategori.'</td>
 	        </tr>';
 			}
-		while ($data = mysql_fetch_assoc($result));
+		while ($data = mysqli_fetch_assoc($result));
 		}
 	
 	

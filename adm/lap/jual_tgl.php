@@ -241,9 +241,9 @@ foreach($daterange as $date)
 
 
 	//jumlah transaksi
-	$qyuk = mysql_query("SELECT * FROM member_order ".
+	$qyuk = mysqli_query($koneksi, "SELECT * FROM member_order ".
 							"WHERE tgl_diterima = '$nilku'");
-	$jml_transaksi = mysql_num_rows($qyuk);
+	$jml_transaksi = mysqli_num_rows($qyuk);
 	
 	if (empty($jml_transaksi))
 		{
@@ -253,10 +253,10 @@ foreach($daterange as $date)
 	
 	
 	//jumlah member transaksi
-	$qyuk = mysql_query("SELECT DISTINCT(member_kd) AS total ".
+	$qyuk = mysqli_query($koneksi, "SELECT DISTINCT(member_kd) AS total ".
 							"FROM member_order ".
 							"WHERE tgl_diterima = '$nilku'");
-	$jml_member = mysql_num_rows($qyuk);
+	$jml_member = mysqli_num_rows($qyuk);
 	
 	if (empty($jml_member))
 		{
@@ -266,25 +266,25 @@ foreach($daterange as $date)
 	
 	
 	//jumlah item terjual
-	$qyuk = mysql_query("SELECT SUM(barang_qty) AS total FROM member_order ".
+	$qyuk = mysqli_query($koneksi, "SELECT SUM(barang_qty) AS total FROM member_order ".
 							"WHERE tgl_diterima = '$nilku'");
-	$ryuk = mysql_fetch_assoc($qyuk);
+	$ryuk = mysqli_fetch_assoc($qyuk);
 	$jml_qty = nosql($ryuk['total']);
 		
 	
 	
 	//omzet
-	$qyuk = mysql_query("SELECT SUM(subtotal) AS total FROM member_order ".
+	$qyuk = mysqli_query($koneksi, "SELECT SUM(subtotal) AS total FROM member_order ".
 							"WHERE tgl_diterima = '$nilku'");
-	$ryuk = mysql_fetch_assoc($qyuk);
+	$ryuk = mysqli_fetch_assoc($qyuk);
 	$jml_total = nosql($ryuk['total']);
 		
 		
 	//ongkir
-	$qyuk = mysql_query("SELECT SUM(jasakirim_ongkir_subtotal) AS total ".
+	$qyuk = mysqli_query($koneksi, "SELECT SUM(jasakirim_ongkir_subtotal) AS total ".
 							"FROM member_order ".
 							"WHERE tgl_diterima = '$nilku'");
-	$ryuk = mysql_fetch_assoc($qyuk);
+	$ryuk = mysqli_fetch_assoc($qyuk);
 	$jml_ongkir = nosql($ryuk['total']);
 
 	echo "<tr valign=\"top\" bgcolor=\"$warna\" onmouseover=\"this.bgColor='$warnaover';\" onmouseout=\"this.bgColor='$warna';\">";
@@ -321,20 +321,20 @@ $tgl2 = trim("$pecahku3-$pecahku2-$pecahku1");
 
 
 //omzet
-$qyuk = mysql_query("SELECT SUM(subtotal) AS total ".
+$qyuk = mysqli_query($koneksi, "SELECT SUM(subtotal) AS total ".
 						"FROM member_order ".
 						"WHERE tgl_diterima >= '$tgl1' ".
 						"AND tgl_diterima <= '$tgl2'");
-$ryuk = mysql_fetch_assoc($qyuk);
+$ryuk = mysqli_fetch_assoc($qyuk);
 $jml_total = nosql($ryuk['total']);
 	
 	
 //ongkir
-$qyuk = mysql_query("SELECT SUM(jasakirim_ongkir_subtotal) AS total ".
+$qyuk = mysqli_query($koneksi, "SELECT SUM(jasakirim_ongkir_subtotal) AS total ".
 						"FROM member_order ".
 						"WHERE tgl_diterima >= '$tgl1' ".
 						"AND tgl_diterima <= '$tgl2'");
-$ryuk = mysql_fetch_assoc($qyuk);
+$ryuk = mysqli_fetch_assoc($qyuk);
 $jml_ongkir = nosql($ryuk['total']);
 
 

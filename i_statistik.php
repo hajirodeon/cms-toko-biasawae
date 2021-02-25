@@ -15,44 +15,44 @@
  
 
 //query
-$qtyk = mysql_query("SELECT * FROM m_item");
-$rtyk = mysql_fetch_assoc($qtyk);
-$jml_item = mysql_num_rows($qtyk);
+$qtyk = mysqli_query($koneksi, "SELECT * FROM m_item");
+$rtyk = mysqli_fetch_assoc($qtyk);
+$jml_item = mysqli_num_rows($qtyk);
 
 
 
 //query
-$qtyk = mysql_query("SELECT SUM(jml) AS total ".
+$qtyk = mysqli_query($koneksi, "SELECT SUM(jml) AS total ".
 						"FROM m_item");
-$rtyk = mysql_fetch_assoc($qtyk);
+$rtyk = mysqli_fetch_assoc($qtyk);
 $jml_stock = nosql($rtyk['total']);
 
 
 
 //query
-$qtyk = mysql_query("SELECT * FROM member_order");
-$rtyk = mysql_fetch_assoc($qtyk);
-$jml_order = mysql_num_rows($qtyk);
+$qtyk = mysqli_query($koneksi, "SELECT * FROM member_order");
+$rtyk = mysqli_fetch_assoc($qtyk);
+$jml_order = mysqli_num_rows($qtyk);
 
 
 
 
 //query
-$qtyk = mysql_query("SELECT * FROM member_order ".
+$qtyk = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE konfirmasi = 'false'");
-$rtyk = mysql_fetch_assoc($qtyk);
-$jml_pending = mysql_num_rows($qtyk);
+$rtyk = mysqli_fetch_assoc($qtyk);
+$jml_pending = mysqli_num_rows($qtyk);
 
 
 
 
 
 //query
-$qtyk = mysql_query("SELECT * FROM member_order ".
+$qtyk = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE konfirmasi = 'true' ".
 						"AND tgl_kirim = '0000-00-00'");
-$rtyk = mysql_fetch_assoc($qtyk);
-$jml_proses = mysql_num_rows($qtyk);
+$rtyk = mysqli_fetch_assoc($qtyk);
+$jml_proses = mysqli_num_rows($qtyk);
 
 
 
@@ -60,11 +60,11 @@ $jml_proses = mysql_num_rows($qtyk);
 
 
 //query
-$qtyk = mysql_query("SELECT * FROM member_order ".
+$qtyk = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE konfirmasi = 'true' ".
 						"AND tgl_kirim <> '0000-00-00'");
-$rtyk = mysql_fetch_assoc($qtyk);
-$jml_dikirim = mysql_num_rows($qtyk);
+$rtyk = mysqli_fetch_assoc($qtyk);
+$jml_dikirim = mysqli_num_rows($qtyk);
 
 
 
@@ -72,21 +72,21 @@ $jml_dikirim = mysql_num_rows($qtyk);
 
 
 //query
-$qtyk = mysql_query("SELECT * FROM member_order ".
+$qtyk = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE konfirmasi = 'true' ".
 						"AND tgl_diterima <> '0000-00-00'");
-$rtyk = mysql_fetch_assoc($qtyk);
-$jml_selesai = mysql_num_rows($qtyk);
+$rtyk = mysqli_fetch_assoc($qtyk);
+$jml_selesai = mysqli_num_rows($qtyk);
 
 
 
 
 
 //query
-$qtyk = mysql_query("SELECT AVG(nilai_kualitas_no) AS total ".
+$qtyk = mysqli_query($koneksi, "SELECT AVG(nilai_kualitas_no) AS total ".
 						"FROM member_testimoni");
-$rtyk = mysql_fetch_assoc($qtyk);
-$jml_kualitas = round(mysql_num_rows($qtyk));
+$rtyk = mysqli_fetch_assoc($qtyk);
+$jml_kualitas = round(mysqli_num_rows($qtyk));
 
 
 //persen
@@ -102,10 +102,10 @@ $kualitas_persen = round(($jml_kualitas / 5) * 100);
 
 
 //query
-$qtyk = mysql_query("SELECT AVG(nilai_manfaat_no) AS total ".
+$qtyk = mysqli_query($koneksi, "SELECT AVG(nilai_manfaat_no) AS total ".
 						"FROM member_testimoni");
-$rtyk = mysql_fetch_assoc($qtyk);
-$jml_manfaat = round(mysql_num_rows($qtyk));
+$rtyk = mysqli_fetch_assoc($qtyk);
+$jml_manfaat = round(mysqli_num_rows($qtyk));
 
 
 //persen
@@ -120,10 +120,10 @@ $manfaat_persen = round(($jml_manfaat / 5) * 100);
 
 
 //query
-$qtyk = mysql_query("SELECT AVG(jml_speed_kirim) AS total ".
+$qtyk = mysqli_query($koneksi, "SELECT AVG(jml_speed_kirim) AS total ".
 						"FROM member_order ".
 						"WHERE tgl_diterima <> '0000-00-00'");
-$rtyk = mysql_fetch_assoc($qtyk);
+$rtyk = mysqli_fetch_assoc($qtyk);
 $jml_speed_kirim = round(nosql($rtyk['total']));
 
 
@@ -135,9 +135,9 @@ $jml_speed_kirim = round(nosql($rtyk['total']));
 
 
 //query
-$qtyk = mysql_query("SELECT * FROM member_diskusi");
-$rtyk = mysql_fetch_assoc($qtyk);
-$jml_diskusi = round(mysql_num_rows($qtyk));
+$qtyk = mysqli_query($koneksi, "SELECT * FROM member_diskusi");
+$rtyk = mysqli_fetch_assoc($qtyk);
+$jml_diskusi = round(mysqli_num_rows($qtyk));
 
 
 
@@ -145,9 +145,9 @@ $jml_diskusi = round(mysql_num_rows($qtyk));
 
 
 //query
-$qtyk = mysql_query("SELECT * FROM member_testimoni");
-$rtyk = mysql_fetch_assoc($qtyk);
-$jml_testimoni = round(mysql_num_rows($qtyk));
+$qtyk = mysqli_query($koneksi, "SELECT * FROM member_testimoni");
+$rtyk = mysqli_fetch_assoc($qtyk);
+$jml_testimoni = round(mysqli_num_rows($qtyk));
 
 
 

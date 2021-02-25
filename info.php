@@ -88,9 +88,9 @@ ob_start();
 
 //view //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //detail
-$qku = mysql_query("SELECT * FROM m_info ".
+$qku = mysqli_query($koneksi, "SELECT * FROM m_info ".
 						"WHERE kd = '$artkd'");
-$rku = mysql_fetch_assoc($qku);
+$rku = mysqli_fetch_assoc($qku);
 $ku_judul = balikin($rku['judul']);
 $ku_isi = balikin($rku['isi']);
 

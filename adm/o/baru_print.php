@@ -41,10 +41,10 @@ ob_start();
 
 
 //ketahui 
-$qku = mysql_query("SELECT * FROM member_order ".
+$qku = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE kd = '$kd'");
-$rku = mysql_fetch_assoc($qku);
-$tku = mysql_num_rows($qku);
+$rku = mysqli_fetch_assoc($qku);
+$tku = mysqli_num_rows($qku);
 $ku_tgl_dikirim = balikin($rku['tgl_dikirim']);
 $ku_tgl_diterima = balikin($rku['tgl_diterima']);
 $ku_jasakirim = balikin($rku['jasakirim']);
@@ -213,11 +213,11 @@ Catatan untuk Penjual :
 
 
 //query
-$q = mysql_query("SELECT * FROM member_order_detail ".
+$q = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 					"WHERE nota_kd = '$kd' ".
 					"ORDER BY item_nama ASC");
-$row = mysql_fetch_assoc($q);
-$total = mysql_num_rows($q);
+$row = mysqli_fetch_assoc($q);
+$total = mysqli_num_rows($q);
 
 do 
 	{
@@ -250,7 +250,7 @@ do
 	</td>
     </tr>';
 	}
-while ($row = mysql_fetch_assoc($q));
+while ($row = mysqli_fetch_assoc($q));
 
 echo '</table>';
 	  

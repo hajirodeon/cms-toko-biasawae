@@ -78,9 +78,9 @@ if ($_POST['btnKRMx'])
 	
 			
 		//nota
-		$qtyk = mysql_query("SELECT * FROM member_order ".
+		$qtyk = mysqli_query($koneksi, "SELECT * FROM member_order ".
 								"WHERE kd = '$notakd'");
-		$rtyk = mysql_fetch_assoc($qtyk);
+		$rtyk = mysqli_fetch_assoc($qtyk);
 		$notakode = cegah($rtyk['nota_kode']);
 	
 	
@@ -89,9 +89,9 @@ if ($_POST['btnKRMx'])
 	
 			
 		//item
-		$qtyk = mysql_query("SELECT * FROM m_item ".
+		$qtyk = mysqli_query($koneksi, "SELECT * FROM m_item ".
 								"WHERE kd = '$kd'");
-		$rtyk = mysql_fetch_assoc($qtyk);
+		$rtyk = mysqli_fetch_assoc($qtyk);
 		$e_nama = cegah($rtyk['nama']);
 		
 	
@@ -101,17 +101,17 @@ if ($_POST['btnKRMx'])
 			
 	
 		//cek
-		$qcc = mysql_query("SELECT * FROM member_testimoni ".
+		$qcc = mysqli_query($koneksi, "SELECT * FROM member_testimoni ".
 								"WHERE member_kd = '$sesikd' ".
 								"AND nota_kd = '$notakd' ".
 								"AND item_kd = '$kd'");
-		$tcc = mysql_num_rows($qcc);
+		$tcc = mysqli_num_rows($qcc);
 		
 		//jika null, insert
 		if (empty($tcc))
 			{
 			//insert
-			mysql_query("INSERT INTO member_testimoni(kd, member_kd, member_nama, ".
+			mysqli_query($koneksi, "INSERT INTO member_testimoni(kd, member_kd, member_nama, ".
 							"nota_kd, nota_kode, item_kd, item_nama, isi, ".
 							"nilai_kualitas_no, nilai_manfaat_no, ".
 							"nilai_kualitas, nilai_manfaat, postdate) VALUES ".
@@ -123,7 +123,7 @@ if ($_POST['btnKRMx'])
 		else
 			{
 			//update
-			mysql_query("UPDATE member_testimoni SET isi = '$f_isi', ".
+			mysqli_query($koneksi, "UPDATE member_testimoni SET isi = '$f_isi', ".
 							"nilai_kualitas_no = '$ikualitasno', ".
 							"nilai_manfaat_no = '$imanfaatno', ".
 							"nilai_kualitas = '$ikualitas', ".
@@ -166,10 +166,10 @@ if ($_POST['btnKRMx2'])
 
 
 	//ketahui 
-	$qku = mysql_query("SELECT * FROM member_order ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM member_order ".
 							"WHERE kd = '$notakd'");
-	$rku = mysql_fetch_assoc($qku);
-	$tku = mysql_num_rows($qku);
+	$rku = mysqli_fetch_assoc($qku);
+	$tku = mysqli_num_rows($qku);
 	$alamat = balikin($rku['penerima_alamat']);
 	$kelurahan = balikin($rku['penerima_kelurahan']);
 	$kecamatan = balikin($rku['penerima_kecamatan']);
@@ -211,7 +211,7 @@ if ($_POST['btnKRMx2'])
 
 
 	//update
-	mysql_query("UPDATE member_order SET latx = '$latitude', ".
+	mysqli_query($koneksi, "UPDATE member_order SET latx = '$latitude', ".
 					"laty = '$longitude', ".
 					"tgl_diterima = '$today' ".
 					"WHERE kd = '$notakd'");
@@ -225,11 +225,11 @@ if ($_POST['btnKRMx2'])
 
 	//set terjual
 	//query
-	$q = mysql_query("SELECT * FROM member_order_detail ".
+	$q = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 						"WHERE nota_kd = '$notakd' ".
 						"ORDER BY item_nama ASC");
-	$row = mysql_fetch_assoc($q);
-	$total = mysql_num_rows($q);
+	$row = mysqli_fetch_assoc($q);
+	$total = mysqli_num_rows($q);
 	
 	do 
 		{
@@ -239,10 +239,10 @@ if ($_POST['btnKRMx2'])
 
 				
 		//update terjual 
-		mysql_query("UPDATE m_item SET jml_terjual = jml_terjual + '$r_qty' ".
+		mysqli_query($koneksi, "UPDATE m_item SET jml_terjual = jml_terjual + '$r_qty' ".
 						"WHERE kd = '$r_itemkd'");
 		}
-	while ($row = mysql_fetch_assoc($q));
+	while ($row = mysqli_fetch_assoc($q));
 
 
 
@@ -390,11 +390,11 @@ if ($s == "detail")
 
 
 	//ketahui nota terakhir, yang belum dibayar
-	$qku = mysql_query("SELECT * FROM member_order ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM member_order ".
 							"WHERE member_kd = '$sesikd' ".
 							"AND kd = '$notakd'");
-	$rku = mysql_fetch_assoc($qku);
-	$tku = mysql_num_rows($qku);
+	$rku = mysqli_fetch_assoc($qku);
+	$tku = mysqli_num_rows($qku);
 	$ku_tgl_dikirim = balikin($rku['tgl_dikirim']);
 	$ku_tgl_diterima = balikin($rku['tgl_diterima']);
 	$ku_jasakirim = balikin($rku['jasakirim']);
@@ -420,12 +420,12 @@ if ($s == "detail")
 
 
 	//query
-	$q = mysql_query("SELECT * FROM member_order_detail ".
+	$q = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND nota_kd = '$notakd' ".
 						"ORDER BY item_nama ASC");
-	$row = mysql_fetch_assoc($q);
-	$total = mysql_num_rows($q);
+	$row = mysqli_fetch_assoc($q);
+	$total = mysqli_num_rows($q);
 		
 
 	echo '<input name="btnBTL" type="submit" value="DAFTAR TRANSAKSI" class="btn btn-danger">
@@ -646,9 +646,9 @@ if ($s == "detail")
 
 				
 			//stock yang ada
-			$qtyk = mysql_query("SELECT * FROM m_item ".
+			$qtyk = mysqli_query($koneksi, "SELECT * FROM m_item ".
 									"WHERE kd = '$r_itemkd'");
-			$rtyk = mysql_fetch_assoc($qtyk);
+			$rtyk = mysqli_fetch_assoc($qtyk);
 			$e_jml = nosql($rtyk['jml']);
 			
 	
@@ -669,11 +669,11 @@ if ($s == "detail")
 			if ($ku_tgl_diterima <> '0000-00-00')
 				{
 				//cek
-				$qcc = mysql_query("SELECT * FROM member_testimoni ".
+				$qcc = mysqli_query($koneksi, "SELECT * FROM member_testimoni ".
 										"WHERE member_kd = '$sesikd' ".
 										"AND nota_kd = '$notakd' ".
 										"AND item_kd = '$r_itemkd'");
-				$rcc = mysql_fetch_assoc($qcc);
+				$rcc = mysqli_fetch_assoc($qcc);
 				$cc_isi = balikin($rcc['isi']);
 				$cc_kualitas_no = nosql($rcc['nilai_kualitas_no']);
 				$cc_manfaat_no = nosql($rcc['nilai_manfaat_no']);
@@ -748,7 +748,7 @@ if ($s == "detail")
 			<td width="150" align="right">'.xduit2($r_subtotal).'</td>
 	        </tr>';
 			}
-		while ($row = mysql_fetch_assoc($q));
+		while ($row = mysqli_fetch_assoc($q));
 
 		echo '</tbody>
 		  </table>
@@ -788,13 +788,13 @@ if ($s == "detail")
 else
 	{
 	//query
-	$q = mysql_query("SELECT * FROM member_order ".
+	$q = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND penerima_nama <> '' ".
 						"AND konfirmasi = 'true' ".
 						"ORDER BY postdate DESC");
-	$row = mysql_fetch_assoc($q);
-	$total = mysql_num_rows($q);
+	$row = mysqli_fetch_assoc($q);
+	$total = mysqli_num_rows($q);
 	
 	if (!empty($total))
 		{
@@ -812,60 +812,60 @@ else
 	  
 	<?php
 	//total
-	$q1 = mysql_query("SELECT * FROM member_order ".
+	$q1 = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND penerima_nama <> '' ".
 						"ORDER BY postdate DESC");
-	$row1 = mysql_fetch_assoc($q1);
-	$jml_total = mysql_num_rows($q1);
+	$row1 = mysqli_fetch_assoc($q1);
+	$jml_total = mysqli_num_rows($q1);
 		
 		
 		
 	//belum konfirmasi
-	$q1 = mysql_query("SELECT * FROM member_order ".
+	$q1 = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND penerima_nama <> '' ".
 						"AND konfirmasi = 'false' ".
 						"ORDER BY postdate DESC");
-	$row1 = mysql_fetch_assoc($q1);
-	$jml_belum_konfirmasi = mysql_num_rows($q1);
+	$row1 = mysqli_fetch_assoc($q1);
+	$jml_belum_konfirmasi = mysqli_num_rows($q1);
 		
 		
 		
 		
 	
 	//sudah konfirmasi
-	$q1 = mysql_query("SELECT * FROM member_order ".
+	$q1 = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND penerima_nama <> '' ".
 						"AND konfirmasi = 'true' ".
 						"ORDER BY postdate DESC");
-	$row1 = mysql_fetch_assoc($q1);
-	$jml_konfirmasi = mysql_num_rows($q1);
+	$row1 = mysqli_fetch_assoc($q1);
+	$jml_konfirmasi = mysqli_num_rows($q1);
 	
 	
 	//telah dikirim
-	$q1 = mysql_query("SELECT * FROM member_order ".
+	$q1 = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND penerima_nama <> '' ".
 						"AND konfirmasi = 'true' ".
 						"AND tgl_kirim <> '0000-00-00' ".
 						"AND tgl_diterima = '0000-00-00' ".
 						"ORDER BY postdate DESC");
-	$row1 = mysql_fetch_assoc($q1);
-	$jml_dikirim = mysql_num_rows($q1);
+	$row1 = mysqli_fetch_assoc($q1);
+	$jml_dikirim = mysqli_num_rows($q1);
 	
 	
 	//diterima
-	$q1 = mysql_query("SELECT * FROM member_order ".
+	$q1 = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND penerima_nama <> '' ".
 						"AND konfirmasi = 'true' ".
 						"AND tgl_kirim <> '0000-00-00' ".
 						"AND tgl_diterima <> '0000-00-00' ".
 						"ORDER BY postdate DESC");
-	$row1 = mysql_fetch_assoc($q1);
-	$jml_diterima = mysql_num_rows($q1);
+	$row1 = mysqli_fetch_assoc($q1);
+	$jml_diterima = mysqli_num_rows($q1);
 
 		
 	
@@ -920,7 +920,7 @@ else
 			$diff=date_diff($date1,$date2);
 			$jml_speed = $diff->format("%a");
 	
-			mysql_query("UPDATE member_order SET jml_speed_kirim = '$jml_speed' ".
+			mysqli_query($koneksi, "UPDATE member_order SET jml_speed_kirim = '$jml_speed' ".
 							"WHERE kd = '$r_kd'");
 			}
 		
@@ -980,7 +980,7 @@ else
 			</td>
 	        </tr>';
 			}
-		while ($row = mysql_fetch_assoc($q));
+		while ($row = mysqli_fetch_assoc($q));
 	
 		echo '</tbody>
 		  </table>

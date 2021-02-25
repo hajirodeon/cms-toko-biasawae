@@ -36,10 +36,10 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 
 
 	//detail item
-	$qcc = mysql_query("SELECT * FROM m_item ".
+	$qcc = mysqli_query($koneksi, "SELECT * FROM m_item ".
 							"WHERE kd = '$itemkd'");
-	$rcc = mysql_fetch_assoc($qcc);
-	$tcc = mysql_num_rows($qcc);
+	$rcc = mysqli_fetch_assoc($qcc);
+	$tcc = mysqli_num_rows($qcc);
 	$item_nama = cegah($rcc['nama']);
 	$item_berat = cegah($rcc['berat']);
 	$item_harga = cegah($rcc['harga']);
@@ -56,18 +56,18 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 	
 
 	//cek nota terakhir, yang masih kosong
-	$qcc = mysql_query("SELECT * FROM member_order ".
+	$qcc = mysqli_query($koneksi, "SELECT * FROM member_order ".
 							"WHERE member_kd = '$sesikd' ".
 							"AND kd = '$notakd' ".
 							"ORDER BY postdate DESC");
-	$rcc = mysql_fetch_assoc($qcc);
-	$tcc = mysql_num_rows($qcc);
+	$rcc = mysqli_fetch_assoc($qcc);
+	$tcc = mysqli_num_rows($qcc);
 	
 	//jika null
 	if (empty($tcc))
 		{
 		//insert
-		mysql_query("INSERT INTO member_order(kd, member_kd, postdate) VALUES ".
+		mysqli_query($koneksi, "INSERT INTO member_order(kd, member_kd, postdate) VALUES ".
 						"('$notakd', '$sesikd', '$today')");
 		}
 	
@@ -79,18 +79,18 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 	
 	
 	//cek item
-	$qcek = mysql_query("SELECT * FROM member_order_detail ".
+	$qcek = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 							"WHERE member_kd = '$sesikd' ".
 							"AND nota_kd = '$notakd' ".
 							"AND item_kd = '$itemkd'");
-	$rcek = mysql_fetch_assoc($qcek);
-	$tcek = mysql_num_rows($qcek);
+	$rcek = mysqli_fetch_assoc($qcek);
+	$tcek = mysqli_num_rows($qcek);
 	
 	//jika null, insert
 	if (empty($tcek))
 		{
 		//masukin detail
-		mysql_query("INSERT INTO member_order_detail(kd, member_kd, member_nama, nota_kd, item_kd, item_nama, ".
+		mysqli_query($koneksi, "INSERT INTO member_order_detail(kd, member_kd, member_nama, nota_kd, item_kd, item_nama, ".
 						"item_filex1, item_berat, item_harga, item_kondisi, ".
 						"jumlah, subtotal, subtotal_berat, postdate) VALUES ".
 						"('$x', '$sesikd', '$sesinama', '$notakd', '$itemkd', '$item_nama', ".
@@ -100,7 +100,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 	else
 		{
 		//update jumlah...
-		mysql_query("UPDATE member_order_detail SET jumlah = jumlah + '$jmlku', ".
+		mysqli_query($koneksi, "UPDATE member_order_detail SET jumlah = jumlah + '$jmlku', ".
 						"subtotal = '$item_subtotal', ".
 						"subtotal_berat = '$item_subtotal_berat', ".
 						"postdate = '$today' ".
@@ -116,7 +116,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 	$stock_sisa = round($item_jml - $jmlku);
 	
 	//update
-	mysql_query("UPDATE m_item SET jml = '$stock_sisa' ".
+	mysqli_query($koneksi, "UPDATE m_item SET jml = '$stock_sisa' ".
 					"WHERE kd = '$itemkd'");
 
 	?>
@@ -165,9 +165,9 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpandiskusi'))
 	
 
 	//detail e
-	$qtyk = mysql_query("SELECT * FROM m_item ".
+	$qtyk = mysqli_query($koneksi, "SELECT * FROM m_item ".
 							"WHERE kd = '$itemkd'");
-	$rtyk = mysql_fetch_assoc($qtyk);
+	$rtyk = mysqli_fetch_assoc($qtyk);
 	$e_nama = balikin($rtyk['nama']);
 	
 	
@@ -182,7 +182,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpandiskusi'))
 
 
 		//insert
-		mysql_query("INSERT INTO member_diskusi(kd, member_kd, member_nama, item_kd, item_nama, isi, postdate) VALUES ".
+		mysqli_query($koneksi, "INSERT INTO member_diskusi(kd, member_kd, member_nama, item_kd, item_nama, isi, postdate) VALUES ".
 						"('$x', '$sesikd', '$sesinama', '$itemkd', '$e_nama', '$e_diskusi', '$today')");
 
 		}
@@ -296,11 +296,11 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'listdiskusi'))
 	
 
 	//list
-	$qku = mysql_query("SELECT * FROM member_diskusi ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM member_diskusi ".
 						"WHERE item_kd = '$itemkd' ".
 						"ORDER BY postdate DESC LIMIT 0,100");
-	$rku = mysql_fetch_assoc($qku);
-	$tku = mysql_num_rows($qku);
+	$rku = mysqli_fetch_assoc($qku);
+	$tku = mysqli_num_rows($qku);
 	
 	//jika ada
 	if (!empty($tku))
@@ -340,7 +340,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'listdiskusi'))
 			</table>
 			<hr>';
 			}
-		while ($rku = mysql_fetch_assoc($qku));
+		while ($rku = mysqli_fetch_assoc($qku));
 		}
 
 	
@@ -365,11 +365,11 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'listtestimoni'))
 	
 
 	//list
-	$qku = mysql_query("SELECT * FROM member_testimoni ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM member_testimoni ".
 						"WHERE item_kd = '$itemkd' ".
 						"ORDER BY postdate DESC LIMIT 0,100");
-	$rku = mysql_fetch_assoc($qku);
-	$tku = mysql_num_rows($qku);
+	$rku = mysqli_fetch_assoc($qku);
+	$tku = mysqli_num_rows($qku);
 	
 	//jika ada
 	if (!empty($tku))
@@ -420,7 +420,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'listtestimoni'))
 			</table>
 			<hr>';
 			}
-		while ($rku = mysql_fetch_assoc($qku));
+		while ($rku = mysqli_fetch_assoc($qku));
 		}
 
 	

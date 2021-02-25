@@ -94,11 +94,11 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 	else
 		{
 		//cek
-		$qku = mysql_query("SELECT * FROM m_member ".
+		$qku = mysqli_query($koneksi, "SELECT * FROM m_member ".
 								"WHERE usernamex = '$euser' ".
 								"AND passwordx = '$epass'");
-		$rku = mysql_fetch_assoc($qku);
-		$tku = mysql_num_rows($qku);
+		$rku = mysqli_fetch_assoc($qku);
+		$tku = mysqli_num_rows($qku);
 		
 		//jika null
 		if (empty($tku))

@@ -104,8 +104,8 @@ ob_start();
 
 //view //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //detail
-$qku = mysql_query("SELECT * FROM m_profil");
-$rku = mysql_fetch_assoc($qku);
+$qku = mysqli_query($koneksi, "SELECT * FROM m_profil");
+$rku = mysqli_fetch_assoc($qku);
 $ku_nama = balikin($rku['nama']);
 $ku_tagline = balikin($rku['tagline']);
 $ku_telp = balikin($rku['telp']);
@@ -122,23 +122,23 @@ $ku_logo = balikin($rku['filex_logo']);
 
 
 //detailkan...	
-$qkux = mysql_query("SELECT * FROM provinsi ".
+$qkux = mysqli_query($koneksi, "SELECT * FROM provinsi ".
 						"WHERE id_prov = '$ku_propinsix'");
-$rkux = mysql_fetch_assoc($qkux);
+$rkux = mysqli_fetch_assoc($qkux);
 $ku_propinsi = balikin($rkux['nama']);
 
 
 //detailkan...	
-$qkux = mysql_query("SELECT * FROM kabupaten ".
+$qkux = mysqli_query($koneksi, "SELECT * FROM kabupaten ".
 						"WHERE id_kab = '$ku_kabupatenx'");
-$rkux = mysql_fetch_assoc($qkux);
+$rkux = mysqli_fetch_assoc($qkux);
 $ku_kabupaten = balikin($rkux['nama']);
 
 
 //detailkan...	
-$qkux = mysql_query("SELECT * FROM kecamatan ".
+$qkux = mysqli_query($koneksi, "SELECT * FROM kecamatan ".
 						"WHERE id_kec = '$ku_kecamatanx'");
-$rkux = mysql_fetch_assoc($qkux);
+$rkux = mysqli_fetch_assoc($qkux);
 $ku_kecamatan = balikin($rkux['nama']);
 
 
@@ -202,9 +202,9 @@ echo '<img src="'.$nil_foto.'" width="100" height="100" border="5">
 
 ';
 //Dapatkan semua 
-$query = mysql_query("SELECT * FROM provinsi ".
+$query = mysqli_query($koneksi, "SELECT * FROM provinsi ".
 						"ORDER BY nama ASC");
-$row = mysql_fetch_assoc($query);
+$row = mysqli_fetch_assoc($query);
 
 
 echo ''.$ku_propinsi.'

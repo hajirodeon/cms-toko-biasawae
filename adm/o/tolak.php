@@ -185,12 +185,12 @@ if (empty($s))
 						"ORDER BY tgl_booking DESC";
 		$sqlresult = $sqlcount;
 
-		$count = mysql_num_rows(mysql_query($sqlcount));
+		$count = mysqli_num_rows(mysqli_query($sqlcount));
 		$pages = $p->findPages($count, $limit);
-		$result = mysql_query("$sqlresult LIMIT ".$start.", ".$limit);
+		$result = mysqli_query($koneksi, "$sqlresult LIMIT ".$start.", ".$limit);
 		$target = "$filenya?crkd=$crkd&crtipe=$crtipe&kunci=$kunci";
 		$pagelist = $p->pageList($_GET['page'], $pages, $target);
-		$data = mysql_fetch_array($result);
+		$data = mysqli_fetch_array($result);
 		}
 
 
@@ -206,11 +206,11 @@ if (empty($s))
 						"ORDER BY tgl_booking DESC";
 		$sqlresult = $sqlcount;
 
-		$count = mysql_num_rows(mysql_query($sqlcount));
+		$count = mysqli_num_rows(mysqli_query($sqlcount));
 		$pages = $p->findPages($count, $limit);
-		$result = mysql_query("$sqlresult LIMIT ".$start.", ".$limit);
+		$result = mysqli_query($koneksi, "$sqlresult LIMIT ".$start.", ".$limit);
 		$pagelist = $p->pageList($_GET['page'], $pages, $target);
-		$data = mysql_fetch_array($result);
+		$data = mysqli_fetch_array($result);
 		}
 
 	if ($count != 0)
@@ -294,12 +294,12 @@ if (empty($s))
 			
 
 			//query
-			$q = mysql_query("SELECT * FROM member_order_detail ".
+			$q = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 								"WHERE member_kd = '$i_member_kd' ".
 								"AND nota_kd = '$kd' ".
 								"ORDER BY item_nama ASC");
-			$row = mysql_fetch_assoc($q);
-			$total = mysql_num_rows($q);
+			$row = mysqli_fetch_assoc($q);
+			$total = mysqli_num_rows($q);
 		
 
 			echo '<table class="table" border="1">
@@ -338,9 +338,9 @@ if (empty($s))
 			
 							
 						//stock yang ada
-						$qtyk = mysql_query("SELECT * FROM m_item ".
+						$qtyk = mysqli_query($koneksi, "SELECT * FROM m_item ".
 												"WHERE kd = '$r_itemkd'");
-						$rtyk = mysql_fetch_assoc($qtyk);
+						$rtyk = mysqli_fetch_assoc($qtyk);
 						$e_jml = nosql($rtyk['jml']);
 						
 				
@@ -354,7 +354,7 @@ if (empty($s))
 						<td width="50">'.$r_qty.'</td>
 				        </tr>';
 						}
-					while ($row = mysql_fetch_assoc($q));
+					while ($row = mysqli_fetch_assoc($q));
 			
 					echo '</table>';
 
@@ -376,7 +376,7 @@ if (empty($s))
 			<td>'.$i_catatan.'</td>
 	    	</tr>';
 			}
-		while ($data = mysql_fetch_assoc($result));
+		while ($data = mysqli_fetch_assoc($result));
 
 		echo '</tbody>
 		  </table>

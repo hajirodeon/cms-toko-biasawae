@@ -79,7 +79,7 @@ if($_POST['btnSMP'])
 			$kdku = $x;
 			
 			//query
-			mysql_query("INSERT INTO m_info(kd, judul, isi, postdate) VALUES ".
+			mysqli_query($koneksi, "INSERT INTO m_info(kd, judul, isi, postdate) VALUES ".
 							"('$kdku', '$e_judul', '$e_isi', '$today')");
 
 
@@ -92,7 +92,7 @@ if($_POST['btnSMP'])
 		else 
 			{
 			//query
-			mysql_query("UPDATE m_info SET judul = '$e_judul', ".
+			mysqli_query($koneksi, "UPDATE m_info SET judul = '$e_judul', ".
 							"isi = '$e_isi', ".
 							"postdate = '$today' ".
 							"WHERE kd = '$kdku'");
@@ -140,7 +140,7 @@ if($_POST['btnHPS'])
 		$kd = nosql($_POST["$yuhu"]);
 
 		//del
-		mysql_query("DELETE FROM m_info ".
+		mysqli_query($koneksi, "DELETE FROM m_info ".
 						"WHERE kd = '$kd'");
 		}
 
@@ -219,9 +219,9 @@ echo '<div class="row">
 if (($s == 'baru') OR ($s == 'edit'))
 	{
 	//query
-	$qx = mysql_query("SELECT * FROM m_info ".
+	$qx = mysqli_query($koneksi, "SELECT * FROM m_info ".
 						"WHERE kd = '$kdku'");
-	$rowx = mysql_fetch_assoc($qx);
+	$rowx = mysqli_fetch_assoc($qx);
 	$e_judul = balikin($rowx['judul']);
 	$e_isi = balikin2($rowx['isi']);
 	$e_postdate = $rowx['postdate'];
@@ -266,11 +266,11 @@ else
 					"ORDER BY postdate DESC";
 	$sqlresult = $sqlcount;
 
-	$count = mysql_num_rows(mysql_query($sqlcount));
+	$count = mysqli_num_rows(mysqli_query($sqlcount));
 	$pages = $p->findPages($count, $limit);
-	$result = mysql_query("$sqlresult LIMIT ".$start.", ".$limit);
+	$result = mysqli_query($koneksi, "$sqlresult LIMIT ".$start.", ".$limit);
 	$pagelist = $p->pageList($_GET['page'], $pages, $target);
-	$data = mysql_fetch_array($result);
+	$data = mysqli_fetch_array($result);
 
 
 
@@ -329,7 +329,7 @@ else
 			<td>'.$i_postdate.'</td>
     		</tr>';
 			}
-		while ($data = mysql_fetch_assoc($result));
+		while ($data = mysqli_fetch_assoc($result));
 
 		echo '</tbody>
 		  </table>

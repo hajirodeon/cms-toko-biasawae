@@ -109,7 +109,7 @@ if ($_POST['btnSMP'])
 	else
 		{
 		//simpan
-		mysql_query("UPDATE member_diskusi SET balasan = '$e_balasan', ".
+		mysqli_query($koneksi, "UPDATE member_diskusi SET balasan = '$e_balasan', ".
 						"balasan_postdate = '$today' ".
 						"WHERE kd = '$kd'");
 		
@@ -204,9 +204,9 @@ echo '<form action="'.$filenya.'" enctype="multipart/form-data" method="post" na
 if ($s == "balas")
 	{
 	//detail
-	$qkuy = mysql_query("SELECT * FROM member_diskusi ".
+	$qkuy = mysqli_query($koneksi, "SELECT * FROM member_diskusi ".
 							"WHERE kd = '$kd'");
-	$rkuy = mysql_fetch_assoc($qkuy);
+	$rkuy = mysqli_fetch_assoc($qkuy);
 	$i_postdate = balikin($rkuy['postdate']);
 	$i_item_nama = balikin($rkuy['item_nama']);
 	$i_isi = balikin($rkuy['isi']);
@@ -271,12 +271,12 @@ else
 							"ORDER BY postdate DESC";
 			$sqlresult = $sqlcount;
 	
-			$count = mysql_num_rows(mysql_query($sqlcount));
+			$count = mysqli_num_rows(mysqli_query($sqlcount));
 			$pages = $p->findPages($count, $limit);
-			$result = mysql_query("$sqlresult LIMIT ".$start.", ".$limit);
+			$result = mysqli_query($koneksi, "$sqlresult LIMIT ".$start.", ".$limit);
 			$target = "$filenya?crkd=$crkd&crtipe=$crtipe&kunci=$kunci";
 			$pagelist = $p->pageList($_GET['page'], $pages, $target);
-			$data = mysql_fetch_array($result);
+			$data = mysqli_fetch_array($result);
 			}
 	
 	
@@ -290,11 +290,11 @@ else
 							"ORDER BY postdate DESC";
 			$sqlresult = $sqlcount;
 	
-			$count = mysql_num_rows(mysql_query($sqlcount));
+			$count = mysqli_num_rows(mysqli_query($sqlcount));
 			$pages = $p->findPages($count, $limit);
-			$result = mysql_query("$sqlresult LIMIT ".$start.", ".$limit);
+			$result = mysqli_query($koneksi, "$sqlresult LIMIT ".$start.", ".$limit);
 			$pagelist = $p->pageList($_GET['page'], $pages, $target);
-			$data = mysql_fetch_array($result);
+			$data = mysqli_fetch_array($result);
 			}
 	
 		if ($count != 0)
@@ -365,7 +365,7 @@ else
 				<td>'.$i_member_nama.'</td>
 		    	</tr>';
 				}
-			while ($data = mysql_fetch_assoc($result));
+			while ($data = mysqli_fetch_assoc($result));
 	
 			echo '</tbody>
 			  </table>

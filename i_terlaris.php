@@ -15,9 +15,9 @@
  
 
 //query
-$qtyk = mysql_query("SELECT * FROM m_item ".
+$qtyk = mysqli_query($koneksi, "SELECT * FROM m_item ".
 						"ORDER BY round(jml_terjual) DESC LIMIT 0,20");
-$rtyk = mysql_fetch_assoc($qtyk);
+$rtyk = mysqli_fetch_assoc($qtyk);
 
 
 do 
@@ -35,7 +35,7 @@ do
 
 
 	//update jumlah dilihat
-	mysql_query("UPDATE m_item SET jml_dilihat = jml_dilihat + 1 ".
+	mysqli_query($koneksi, "UPDATE m_item SET jml_dilihat = jml_dilihat + 1 ".
 					"WHERE kd = '$e_kd'");
 	
 
@@ -60,5 +60,5 @@ do
 	<br>';
 
 	}
-while ($rtyk = mysql_fetch_assoc($qtyk));
+while ($rtyk = mysqli_fetch_assoc($qtyk));
 ?>

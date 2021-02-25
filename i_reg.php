@@ -57,23 +57,23 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 	$kecamatan = cegah($_GET['kecamatan']);
 	
 	//detail
-	$qku = mysql_query("SELECT * FROM provinsi ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM provinsi ".
 						"WHERE id_prov = '$provinsi'");
-	$rku = mysql_fetch_assoc($qku);
+	$rku = mysqli_fetch_assoc($qku);
 	$provinsi = cegah($rku['nama']);
 	
 	
 	//detail
-	$qku = mysql_query("SELECT * FROM kabupaten ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM kabupaten ".
 						"WHERE id_kab = '$kabupaten'");
-	$rku = mysql_fetch_assoc($qku);
+	$rku = mysqli_fetch_assoc($qku);
 	$kabupaten = cegah($rku['nama']);
 	
 	
 	//detail
-	$qku = mysql_query("SELECT * FROM kecamatan ".
+	$qku = mysqli_query($koneksi, "SELECT * FROM kecamatan ".
 						"WHERE id_kec = '$kecamatan'");
-	$rku = mysql_fetch_assoc($qku);
+	$rku = mysqli_fetch_assoc($qku);
 	$kecamatan = cegah($rku['nama']);
 
 	
@@ -95,16 +95,16 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 	else
 		{
 		//query
-		$q = mysql_query("SELECT * FROM m_member ".
+		$q = mysqli_query($koneksi, "SELECT * FROM m_member ".
 							"WHERE usernamex = '$e_user'");
-		$row = mysql_fetch_assoc($q);
-		$total = mysql_num_rows($q);
+		$row = mysqli_fetch_assoc($q);
+		$total = mysqli_num_rows($q);
 
 		//cek 
 		if (empty($total))
 			{
 			//insert
-			mysql_query("INSERT INTO m_member(kd, usernamex, passwordx, nama, tmp_lahir, tgl_lahir, ".
+			mysqli_query($koneksi, "INSERT INTO m_member(kd, usernamex, passwordx, nama, tmp_lahir, tgl_lahir, ".
 							"kelamin, telp, email, web, postdate, ".
 							"propinsi, kabupaten, kecamatan, kelurahan, alamat, kodepos) VALUES ".
 							"('$x', '$e_user', '$e_passx', '$e_nama', '$e_tmp_lahir', '$e_tgl_lahir', ".
@@ -128,8 +128,8 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'simpan'))
 
 
 //detail
-$qku = mysql_query("SELECT * FROM m_profil");
-$rku = mysql_fetch_assoc($qku);
+$qku = mysqli_query($koneksi, "SELECT * FROM m_profil");
+$rku = mysqli_fetch_assoc($qku);
 $ku_nama = balikin($rku['nama']);
 $ku_email = balikin($rku['email']);
 $ku_web = balikin($rku['web']);
@@ -331,9 +331,9 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'form'))
 	Propinsi : 
 	<br>';			
 	//Dapatkan semua 
-	$query = mysql_query("SELECT * FROM provinsi ".
+	$query = mysqli_query($koneksi, "SELECT * FROM provinsi ".
 							"ORDER BY nama ASC");
-	$row = mysql_fetch_assoc($query);
+	$row = mysqli_fetch_assoc($query);
 	?>
 	
 	<select name="provinsi" id="provinsi" class="btn btn-info">
@@ -346,7 +346,7 @@ if ((isset($_GET['aksi']) && $_GET['aksi'] == 'form'))
 					 
 	                echo '<option value="'.$r_idprov.'">'.$r_nama.'</option>';
 					}
-				while ($row = mysql_fetch_assoc($query));
+				while ($row = mysqli_fetch_assoc($query));
 	        ?>
 	</select>
 	</p>

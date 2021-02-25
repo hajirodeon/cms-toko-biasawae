@@ -6,12 +6,12 @@ $adm_session = nosql($_SESSION['adm_session']);
 $pass16_session = nosql($_SESSION['pass16_session']);
 $hajirobe_session = nosql($_SESSION['hajirobe_session']);
 
-$qbw = mysql_query("SELECT kd FROM adminx ".
+$qbw = mysqli_query($koneksi, "SELECT kd FROM adminx ".
 						"WHERE kd = '$kd16_session' ".
 						"AND usernamex = '$username16_session' ".
 						"AND passwordx = '$pass16_session'");
-$rbw = mysql_fetch_assoc($qbw);
-$tbw = mysql_num_rows($qbw);
+$rbw = mysqli_fetch_assoc($qbw);
+$tbw = mysqli_num_rows($qbw);
 
 if (($tbw == 0) OR (empty($kd16_session))
 	OR (empty($username16_session))

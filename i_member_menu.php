@@ -108,12 +108,12 @@ else
 		
 		
 	//ketahui jumlah item yang masih dalam troli belanja
-	$q = mysql_query("SELECT * FROM member_order_detail ".
+	$q = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 						"WHERE member_kd = '$kd6_session' ".
 						"AND nota_kd = '$notakd' ".
 						"ORDER BY item_nama ASC");
-	$row = mysql_fetch_assoc($q);
-	$total = mysql_num_rows($q);
+	$row = mysqli_fetch_assoc($q);
+	$total = mysqli_num_rows($q);
 		
 		
 	echo '<li '.$statusku3.'>

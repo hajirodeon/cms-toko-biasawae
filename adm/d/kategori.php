@@ -56,9 +56,9 @@ if ($s == "edit")
 	{
 	$kdx = nosql($_REQUEST['kd']);
 
-	$qx = mysql_query("SELECT * FROM m_kategori ".
+	$qx = mysqli_query($koneksi, "SELECT * FROM m_kategori ".
 						"WHERE kd = '$kdx'");
-	$rowx = mysql_fetch_assoc($qx);
+	$rowx = mysqli_fetch_assoc($qx);
 	$kategori = balikin($rowx['nama']);
 	}
 
@@ -86,7 +86,7 @@ if (($_POST['btnSMP']) OR ($_POST['kategori']))
 		//jika update
 		if ($s == "edit")
 			{
-			mysql_query("UPDATE m_kategori SET nama = '$kategori' ".
+			mysqli_query($koneksi, "UPDATE m_kategori SET nama = '$kategori' ".
 							"WHERE kd = '$kd'");
 
 			//re-direct
@@ -100,10 +100,10 @@ if (($_POST['btnSMP']) OR ($_POST['kategori']))
 		if (empty($s))
 			{
 			//cek
-			$qcc = mysql_query("SELECT * FROM m_kategori ".
+			$qcc = mysqli_query($koneksi, "SELECT * FROM m_kategori ".
 									"WHERE nama = '$kategori'");
-			$rcc = mysql_fetch_assoc($qcc);
-			$tcc = mysql_num_rows($qcc);
+			$rcc = mysqli_fetch_assoc($qcc);
+			$tcc = mysqli_num_rows($qcc);
 
 			//nek ada
 			if ($tcc != 0)
@@ -115,7 +115,7 @@ if (($_POST['btnSMP']) OR ($_POST['kategori']))
 				}
 			else
 				{
-				mysql_query("INSERT INTO m_kategori(kd, nama, postdate) VALUES ".
+				mysqli_query($koneksi, "INSERT INTO m_kategori(kd, nama, postdate) VALUES ".
 								"('$x', '$kategori', '$today')");
 
 
@@ -147,7 +147,7 @@ if ($_POST['btnHPS'])
 		$kd = nosql($_POST["$yuhu"]);
 
 		//del
-		mysql_query("DELETE FROM m_kategori ".
+		mysqli_query($koneksi, "DELETE FROM m_kategori ".
 						"WHERE kd = '$kd'");
 		}
 
@@ -189,11 +189,11 @@ $sqlcount = "SELECT * FROM m_kategori ".
 				"ORDER BY nama ASC";
 $sqlresult = $sqlcount;
 
-$count = mysql_num_rows(mysql_query($sqlcount));
+$count = mysqli_num_rows(mysqli_query($sqlcount));
 $pages = $p->findPages($count, $limit);
-$result = mysql_query("$sqlresult LIMIT ".$start.", ".$limit);
+$result = mysqli_query($koneksi, "$sqlresult LIMIT ".$start.", ".$limit);
 $pagelist = $p->pageList($_GET['page'], $pages, $target);
-$data = mysql_fetch_array($result);
+$data = mysqli_fetch_array($result);
 
 
 //view //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -264,7 +264,7 @@ if ($count != 0)
 		<td>'.$i_nama.'</td>
         </tr>';
 		}
-	while ($data = mysql_fetch_assoc($result));
+	while ($data = mysqli_fetch_assoc($result));
 	}
 
 

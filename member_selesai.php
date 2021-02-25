@@ -43,25 +43,25 @@ $sesinama = cegah($_SESSION['nama6_session']);
 //proses /////////////////////////////////////////////////////////////////////////////////////////////
 //hitung total transaksi
 //ketahui detail sebelumnya...
-$qku = mysql_query("SELECT * FROM member_order_detail ".
+$qku = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND nota_kd = '$notakd'");
-$rku = mysql_fetch_assoc($qku);
-$tku = mysql_num_rows($qku);
+$rku = mysqli_fetch_assoc($qku);
+$tku = mysqli_num_rows($qku);
 $ku_total_jenis = $tku;
 
 
 
 
 //ketahui detail sebelumnya...
-$qku2 = mysql_query("SELECT SUM(subtotal) AS total, ".
+$qku2 = mysqli_query($koneksi, "SELECT SUM(subtotal) AS total, ".
 						"SUM(subtotal_berat) AS total_berat, ".
 						"SUM(jumlah) AS total_qty, ".
 						"nota_kode AS notaku ".
 						"FROM member_order_detail ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND nota_kd = '$notakd'");
-$rku2 = mysql_fetch_assoc($qku2);
+$rku2 = mysqli_fetch_assoc($qku2);
 $ku_nota_kode = nosql($rku2['notaku']);
 $ku_total = nosql($rku2['total']);
 $ku_total_berat = nosql($rku2['total_berat']);
@@ -90,7 +90,7 @@ if (empty($ku_nota_kode))
 	
 	
 	//update ke database
-	mysql_query("UPDATE member_order SET member_nama = '$sesinama', ".
+	mysqli_query($koneksi, "UPDATE member_order SET member_nama = '$sesinama', ".
 					"tgl_booking = '$today', ".
 					"nota_kode = '$ku_nota', ".
 					"barang_jml_jenis = '$ku_total_jenis', ".
@@ -103,7 +103,7 @@ if (empty($ku_nota_kode))
 					"AND kd = '$notakd'");
 	
 	
-	mysql_query("UPDATE member_order_detail SET member_nama = '$sesinama', ".
+	mysqli_query($koneksi, "UPDATE member_order_detail SET member_nama = '$sesinama', ".
 					"nota_kode = '$ku_nota' ".
 					"WHERE member_kd = '$sesikd' ".
 					"AND nota_kd = '$notakd'");
@@ -295,11 +295,11 @@ echo '<h1>'.$judul.'</h1>
 
 
 //ketahui nota terakhir, yang belum dibayar
-$qku = mysql_query("SELECT * FROM member_order ".
+$qku = mysqli_query($koneksi, "SELECT * FROM member_order ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND kd = '$notakd'");
-$rku = mysql_fetch_assoc($qku);
-$tku = mysql_num_rows($qku);
+$rku = mysqli_fetch_assoc($qku);
+$tku = mysqli_num_rows($qku);
 $ku_nota_kode = balikin($rku['nota_kode']);
 $ku_tgl_booking = balikin($rku['tgl_booking']);
 $ku_barang_jml_jenis = nosql($rku['barang_jml_jenis']);
@@ -312,8 +312,8 @@ $ku_total = nosql($rku['total']);
 
 
 //detail pembayaran
-$qku2 = mysql_query("SELECT * FROM m_pembayaran");
-$rku2 = mysql_fetch_assoc($qku2);
+$qku2 = mysqli_query($koneksi, "SELECT * FROM m_pembayaran");
+$rku2 = mysqli_fetch_assoc($qku2);
 $ku2_judul = balikin($rku2['judul']);
 $ku2_isi = balikin($rku2['isi']);
 
@@ -396,9 +396,9 @@ else
 			Propinsi : 
 			<br>';			
 			//Dapatkan semua 
-			$query = mysql_query("SELECT * FROM provinsi ".
+			$query = mysqli_query($koneksi, "SELECT * FROM provinsi ".
 									"ORDER BY nama ASC");
-			$row = mysql_fetch_assoc($query);
+			$row = mysqli_fetch_assoc($query);
 			?>
 			
 			<select name="provinsi" id="provinsi" class="btn btn-info">
@@ -411,7 +411,7 @@ else
 							 
 			                echo '<option value="'.$r_idprov.'">'.$r_nama.'</option>';
 							}
-						while ($row = mysql_fetch_assoc($query));
+						while ($row = mysqli_fetch_assoc($query));
 			        ?>
 			</select>
 			</p>
@@ -524,10 +524,10 @@ else
 			<option value="<?php echo $f_jasakirim;?>">- <?php echo $f_jasakirim;?> -</option>
 			        <?php
 						//Dapatkan semua 
-						$query = mysql_query("SELECT * FROM m_jasa_kirim ".
+						$query = mysqli_query($koneksi, "SELECT * FROM m_jasa_kirim ".
 												"WHERE status = 'true' ".
 												"ORDER BY nama ASC");
-						$row = mysql_fetch_assoc($query);
+						$row = mysqli_fetch_assoc($query);
 			
 			            do
 			            	{
@@ -541,7 +541,7 @@ else
 							
 			                echo '<option value="'.$r_kd.'">'.$r_nama.' []</option>';
 							}
-						while ($row = mysql_fetch_assoc($query));
+						while ($row = mysqli_fetch_assoc($query));
 			        ?>
 			</select>
 			</p>
@@ -559,12 +559,12 @@ else
 	
 		<?php
 		//query
-		$q = mysql_query("SELECT * FROM member_order_detail ".
+		$q = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 							"WHERE member_kd = '$sesikd' ".
 							"AND nota_kd = '$notakd' ".
 							"ORDER BY item_nama ASC");
-		$row = mysql_fetch_assoc($q);
-		$total = mysql_num_rows($q);
+		$row = mysqli_fetch_assoc($q);
+		$total = mysqli_num_rows($q);
 			
 	
 	
@@ -625,9 +625,9 @@ else
 	
 					
 				//stock yang ada
-				$qtyk = mysql_query("SELECT * FROM m_item ".
+				$qtyk = mysqli_query($koneksi, "SELECT * FROM m_item ".
 										"WHERE kd = '$r_itemkd'");
-				$rtyk = mysql_fetch_assoc($qtyk);
+				$rtyk = mysqli_fetch_assoc($qtyk);
 				$e_jml = nosql($rtyk['jml']);
 				
 		
@@ -643,7 +643,7 @@ else
 				<td width="150" align="right">'.xduit2($r_subtotal).'</td>
 		        </tr>';
 				}
-			while ($row = mysql_fetch_assoc($q));
+			while ($row = mysqli_fetch_assoc($q));
 	
 			echo '</tbody>
 			  </table>

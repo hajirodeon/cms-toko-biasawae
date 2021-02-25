@@ -173,12 +173,12 @@ $(document).ready(function(){
 
 	<?php
 	//query
-	$q = mysql_query("SELECT * FROM member_order_detail ".
+	$q = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND nota_kd = '$notakd' ".
 						"ORDER BY item_nama ASC");
-	$row = mysql_fetch_assoc($q);
-	$total = mysql_num_rows($q);
+	$row = mysqli_fetch_assoc($q);
+	$total = mysqli_num_rows($q);
 
 
 	do
@@ -213,7 +213,7 @@ $(document).ready(function(){
 		<?php
 	
 	    }
-	while ($row = mysql_fetch_assoc($q));
+	while ($row = mysqli_fetch_assoc($q));
 	?>
 	
 	
@@ -227,29 +227,29 @@ $(document).ready(function(){
 
 <?php
 //query
-$q = mysql_query("SELECT * FROM member_order ".
+$q = mysqli_query($koneksi, "SELECT * FROM member_order ".
 					"WHERE member_kd = '$sesikd' ".
 					"AND kd = '$notakd' ".
 					"AND penerima_nama = ''");
-$row = mysql_fetch_assoc($q);
-$total = mysql_num_rows($q);
+$row = mysqli_fetch_assoc($q);
+$total = mysqli_num_rows($q);
 
 if (!empty($total))
 	{
 	//query
-	$q = mysql_query("SELECT * FROM member_order_detail ".
+	$q = mysqli_query($koneksi, "SELECT * FROM member_order_detail ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND nota_kd = '$notakd' ".
 						"ORDER BY item_nama ASC");
-	$row = mysql_fetch_assoc($q);
+	$row = mysqli_fetch_assoc($q);
 
 
 	//update total
-	$q2 = mysql_query("SELECT SUM(subtotal) AS total ".
+	$q2 = mysqli_query($koneksi, "SELECT SUM(subtotal) AS total ".
 						"FROM member_order_detail ".
 						"WHERE member_kd = '$sesikd' ".
 						"AND nota_kd = '$notakd'");
-	$row2 = mysql_fetch_assoc($q2);
+	$row2 = mysqli_fetch_assoc($q2);
 	$totalnya2 = nosql($row2['total']);
 	$totalnyax2 = xduit2($totalnya2);
 
@@ -331,9 +331,9 @@ if (!empty($total))
 
 				
 			//stock yang ada
-			$qtyk = mysql_query("SELECT * FROM m_item ".
+			$qtyk = mysqli_query($koneksi, "SELECT * FROM m_item ".
 									"WHERE kd = '$r_itemkd'");
-			$rtyk = mysql_fetch_assoc($qtyk);
+			$rtyk = mysqli_fetch_assoc($qtyk);
 			$e_kd = nosql($rtyk['kd']);
 			$e_nama = balikin($rtyk['nama']);
 			$e_url_cantik = balikin($rtyk['url_cantik']);
@@ -386,7 +386,7 @@ if (!empty($total))
 			</td>
 	        </tr>';
 			}
-		while ($row = mysql_fetch_assoc($q));
+		while ($row = mysqli_fetch_assoc($q));
 
 		echo '</tbody>
 		  </table>

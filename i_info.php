@@ -15,9 +15,9 @@
  
 
 //query
-$qtyk = mysql_query("SELECT * FROM m_info ".
+$qtyk = mysqli_query($koneksi, "SELECT * FROM m_info ".
 						"ORDER BY postdate DESC LIMIT 0,5");
-$rtyk = mysql_fetch_assoc($qtyk);
+$rtyk = mysqli_fetch_assoc($qtyk);
 
 
 do 
@@ -37,7 +37,7 @@ do
 	</div>';
 
 	}
-while ($rtyk = mysql_fetch_assoc($qtyk));
+while ($rtyk = mysqli_fetch_assoc($qtyk));
 
 
 ?>
